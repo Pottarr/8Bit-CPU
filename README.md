@@ -1,5 +1,4 @@
 # 8Bits CPU Simulation
-- MUL
 
 ## Program used
 
@@ -68,3 +67,7 @@ Total bits: 24
 | $A_{1}A_{2}A_{3}A_{4}$ | $0$ | $CCCC$ | $D$ | $EEE$ | $FFF$ | $GGGGGGGG$ |
 | $A_{1}A_{2}A_{3}A_{4}$ | $1$ | $CCCC$ | $D$ | $EEE$ | $FFF$ | $GGGGGGGG$ |
 
+### Contributers
+
+- [Theepakorn Phayonrat](https://github.com/Pottarr)
+- [Chawit Sarutdeechaikul](https://github.com/its-sentral)
