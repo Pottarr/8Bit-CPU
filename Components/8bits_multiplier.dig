@@ -655,7 +655,7 @@
         </entry>
         <entry>
           <string>NetName</string>
-          <string>O</string>
+          <string>Overflow_{Check}</string>
         </entry>
       </elementAttributes>
       <pos x="1940" y="-1100"/>
@@ -669,10 +669,10 @@
         </entry>
         <entry>
           <string>NetName</string>
-          <string>O</string>
+          <string>Overflow_{Check}</string>
         </entry>
       </elementAttributes>
-      <pos x="2300" y="-140"/>
+      <pos x="2340" y="-140"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
@@ -683,6 +683,19 @@
         </entry>
       </elementAttributes>
       <pos x="2600" y="-120"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Testcase</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Testdata</string>
+          <testData>
+            <dataString>A	B	M	O_{F}
+4	100	144	1</dataString>
+          </testData>
+        </entry>
+      </elementAttributes>
+      <pos x="960" y="-840"/>
     </visualElement>
   </visualElements>
   <wires>
@@ -735,7 +748,7 @@
       <p2 x="2180" y="-140"/>
     </wire>
     <wire>
-      <p1 x="2300" y="-140"/>
+      <p1 x="2340" y="-140"/>
       <p2 x="2380" y="-140"/>
     </wire>
     <wire>
@@ -1325,10 +1338,6 @@
     <wire>
       <p1 x="900" y="-400"/>
       <p2 x="900" y="-60"/>
-    </wire>
-    <wire>
-      <p1 x="2180" y="-180"/>
-      <p2 x="2180" y="-160"/>
     </wire>
     <wire>
       <p1 x="2180" y="-920"/>

@@ -23,11 +23,11 @@
       <elementAttributes>
         <entry>
           <string>Input Splitting</string>
-          <string>1,1,1</string>
+          <string>1,1,1,1</string>
         </entry>
         <entry>
           <string>Output Splitting</string>
-          <string>3</string>
+          <string>4</string>
         </entry>
       </elementAttributes>
       <pos x="580" y="300"/>
@@ -37,28 +37,28 @@
       <elementAttributes>
         <entry>
           <string>Label</string>
-          <string>ONZ_{i}</string>
+          <string>CONZ_{i}</string>
         </entry>
         <entry>
           <string>Bits</string>
-          <int>3</int>
+          <int>4</int>
         </entry>
       </elementAttributes>
-      <pos x="340" y="300"/>
+      <pos x="320" y="300"/>
     </visualElement>
     <visualElement>
       <elementName>Splitter</elementName>
       <elementAttributes>
         <entry>
           <string>Input Splitting</string>
-          <string>3</string>
+          <string>4</string>
         </entry>
         <entry>
           <string>Output Splitting</string>
-          <string>1,1,1</string>
+          <string>1,1,1,1</string>
         </entry>
       </elementAttributes>
-      <pos x="380" y="300"/>
+      <pos x="360" y="300"/>
     </visualElement>
     <visualElement>
       <elementName>In</elementName>
@@ -68,21 +68,26 @@
           <string>Do_{Write}</string>
         </entry>
       </elementAttributes>
-      <pos x="340" y="340"/>
+      <pos x="320" y="340"/>
     </visualElement>
     <visualElement>
       <elementName>Out</elementName>
       <elementAttributes>
         <entry>
           <string>Label</string>
-          <string>ONZ_{o}</string>
+          <string>CONZ_{o}</string>
         </entry>
         <entry>
           <string>Bits</string>
-          <int>3</int>
+          <int>4</int>
         </entry>
       </elementAttributes>
       <pos x="620" y="300"/>
+    </visualElement>
+    <visualElement>
+      <elementName>D_flip_flop.dig</elementName>
+      <elementAttributes/>
+      <pos x="460" y="480"/>
     </visualElement>
   </visualElements>
   <wires>
@@ -99,7 +104,7 @@
       <p2 x="580" y="320"/>
     </wire>
     <wire>
-      <p1 x="400" y="320"/>
+      <p1 x="380" y="320"/>
       <p2 x="460" y="320"/>
     </wire>
     <wire>
@@ -111,7 +116,15 @@
       <p2 x="460" y="400"/>
     </wire>
     <wire>
-      <p1 x="360" y="420"/>
+      <p1 x="400" y="480"/>
+      <p2 x="460" y="480"/>
+    </wire>
+    <wire>
+      <p1 x="520" y="480"/>
+      <p2 x="560" y="480"/>
+    </wire>
+    <wire>
+      <p1 x="340" y="420"/>
       <p2 x="440" y="420"/>
     </wire>
     <wire>
@@ -119,7 +132,7 @@
       <p2 x="460" y="420"/>
     </wire>
     <wire>
-      <p1 x="400" y="340"/>
+      <p1 x="380" y="340"/>
       <p2 x="420" y="340"/>
     </wire>
     <wire>
@@ -131,28 +144,48 @@
       <p2 x="580" y="340"/>
     </wire>
     <wire>
-      <p1 x="340" y="340"/>
-      <p2 x="360" y="340"/>
+      <p1 x="320" y="340"/>
+      <p2 x="340" y="340"/>
     </wire>
     <wire>
       <p1 x="440" y="260"/>
       <p2 x="460" y="260"/>
     </wire>
     <wire>
+      <p1 x="440" y="500"/>
+      <p2 x="460" y="500"/>
+    </wire>
+    <wire>
+      <p1 x="380" y="360"/>
+      <p2 x="400" y="360"/>
+    </wire>
+    <wire>
+      <p1 x="560" y="360"/>
+      <p2 x="580" y="360"/>
+    </wire>
+    <wire>
       <p1 x="540" y="300"/>
       <p2 x="580" y="300"/>
     </wire>
     <wire>
-      <p1 x="400" y="300"/>
+      <p1 x="380" y="300"/>
       <p2 x="420" y="300"/>
     </wire>
     <wire>
-      <p1 x="340" y="300"/>
-      <p2 x="380" y="300"/>
+      <p1 x="320" y="300"/>
+      <p2 x="360" y="300"/>
     </wire>
     <wire>
       <p1 x="600" y="300"/>
       <p2 x="620" y="300"/>
+    </wire>
+    <wire>
+      <p1 x="400" y="360"/>
+      <p2 x="400" y="480"/>
+    </wire>
+    <wire>
+      <p1 x="560" y="360"/>
+      <p2 x="560" y="480"/>
     </wire>
     <wire>
       <p1 x="420" y="240"/>
@@ -163,8 +196,8 @@
       <p2 x="420" y="400"/>
     </wire>
     <wire>
-      <p1 x="360" y="340"/>
-      <p2 x="360" y="420"/>
+      <p1 x="340" y="340"/>
+      <p2 x="340" y="420"/>
     </wire>
     <wire>
       <p1 x="440" y="260"/>
@@ -173,6 +206,10 @@
     <wire>
       <p1 x="440" y="340"/>
       <p2 x="440" y="420"/>
+    </wire>
+    <wire>
+      <p1 x="440" y="420"/>
+      <p2 x="440" y="500"/>
     </wire>
     <wire>
       <p1 x="540" y="240"/>
