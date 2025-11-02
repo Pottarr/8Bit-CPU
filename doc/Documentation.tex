@@ -1,15 +1,17 @@
 \documentclass[12pt]{report}
 
-\usepackage{tabularx}
-\usepackage{listings}
-\usepackage{titlesec}
-\usepackage{tocloft}
-\usepackage{hyperref}
 \usepackage[a4paper, total={6in, 8in}]{geometry}
 \usepackage{amsmath, amssymb}
-\usepackage{graphicx}
-\usepackage{lipsum}
 \usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{lipsum}
+\usepackage{minted}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{tocloft}
 
 \setlength{\parindent}{1cm}
 \setlength{\parskip}{5pt}
@@ -40,13 +42,21 @@
 
 % Preface page
 \chapter*{Preface}
-\hspace{1cm} Hello, World! \\
+
+Hello, World! \\
+Line 1 \\
+Line 2 \\
+Line 3 \\
+Line 4 \\
+Line 5 \\
+
+
 \newpage
 
 % Abstract page
 \chapter*{Abstract}
 
-\hspace{1cm}This project, titled QtGroove, presents the design and implementation of a music player
+This project, titled QtGroove, presents the design and implementation of a music player
 application developed in the C++ programming language with Qt GUI framework. As part of the
 Object Oriented Programming course in Software Engineering at KMITL, QtGroove was created to develop
 a user-friendly multi-platform music player in C++ programming language that provide users with typical
@@ -62,7 +72,7 @@ features found in general music player.
 \section{Project Overview}
 
 
-\hspace{1cm}QtGroove is a graphic-based music player written in C++ using the Qt framework. The project
+QtGroove is a graphic-based music player written in C++ using the Qt framework. The project
 aims to be a lightweight music player with a friendly user interface. 	
 
 QtGroove will have the functions of a typical music player like a file browser, the ability to make
@@ -71,11 +81,11 @@ customization.
 
 
 \section{Background}
-\hspace{1cm}We wanted to created our own multi-platform GUI music player, which is efficience to navigate
+We wanted to created our own multi-platform GUI music player, which is efficience to navigate
 through the UI with low learning curve.
 
 \section{Objective}
-\hspace{1cm}This project aims to create a lightweight and multi-platform music player as an alternative
+This project aims to create a lightweight and multi-platform music player as an alternative
 to other music players. The app can great for listening to local music files. The making of this app
 also serves as an experience for us to learn C++ and work with the qt framework.
 
@@ -83,39 +93,61 @@ Since this is a duo project, it is a great opportunity to learn teamwork and str
 products.
  
 \chapter{Project Overview}
-\section{Design}
+\section{Hardware Design}
 
-\subsection{Program Overview}
-
-
-\hspace{1cm}We have 3 main sections in our application.
+\subsection{Structure}
 
 
-\includegraphics[width=0.6\textwidth]{images/app_overview.png} % Adjust width as needed
-
-And here are our buttons.
-
-\includegraphics[height=0.25\textwidth]{images/btns.png} % Adjust width as needed
+\includegraphics[width=0.6\textwidth]{images/app_overview.png}
 
 \newpage
 
-\section{Database}
+\subsection{Pipeline States}
 
-\hspace{1cm}We use SQLite for our database.
+\subsection{Pipeline Hazards Management}
 
-\subsection{playlist.db}
+\newpage
 
-\hspace{1cm}We created playlist.db in the 'db' directory and that file will
-be our main database file.
+\section{Software Design}
 
-Our 'playlist.db' has default table named 'playlists' to keep track about our playlists'
-existences
+\subsection{Instructions}
 
-\includegraphics[width=0.7\textwidth]{images/tables.png} % Adjust width as needed
+\begin{center}
+\scalebox{0.8}{
+\[
+\begin{array}{|l|l|l|}
+\hline
+\textbf{Instruction} & \textbf{Opcode + Fields} & \textbf{Description} \\[4pt]
+\hline
 
-And in each playlists has their own columns which store the data.
 
-\includegraphics[height=0.1\textwidth]{images/cols.png} % Adjust width as needed
+LD & 0000 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] & \text{Load immediate into register} \\[4pt]
+MOV & 0001 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] or #IMM [7:0] & \text{Move data or immediate} \\[4pt]
+ST  & 0010 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] & \text{Store register to memory} \\[4pt]
+RD  & 0011 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] & \text{Read memory to register} \\[4pt]
+ADD & 0100 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Add two registers} \\[4pt]
+SUB & 0101 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Subtract two registers} \\[4pt]
+MUL & 0110 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Multiply two registers} \\[4pt]
+WR  & 0111 | IMM flag [18] | R_src1 [2:0] or #IMM [7:0] & \text{Write register to output} \\[4pt]
+AND & 1000 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise AND} \\[4pt]
+OR  & 1001 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise OR} \\[4pt]
+XOR & 1010 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise XOR} \\[4pt]
+NOT & 1011 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise NOT} \\[4pt]
+BC & 1100 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Branch if carry} \\[4pt]
+BZ  & 1101 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Branch if zero} \\[4pt]
+BNZ & 1110 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Branch if not zero} \\[4pt]
+B & 1111 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Unconditional branch} \\[4pt]
+\hline
+\end{array}
+\]
+}
+\end{center}
+
+\subsection{Assembler}
+
+We had written an assembler in Python. \\
+
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{py}{../test/converter.py}
 
 \newpage
 
@@ -129,7 +161,7 @@ After that open project in Qt Creator, and run the program.
 
 \section{Alternative way for Windows users}
 
-\hspace{1cm}You can download pre-release version (v0.1) from GitHub too.
+You can download pre-release version (v0.1) from GitHub too.
 (Link in Appendix)
 
 
@@ -145,7 +177,7 @@ After that open project in Qt Creator, and run the program.
 \end{itemize}
 
 \section{Accomplishment}
-\hspace{1cm}We have created a user friendly multi-platform music player application.
+We have created a user friendly multi-platform music player application.
 
 \newpage
 
