@@ -69,7 +69,15 @@ def assemble_binary(line: str) -> str:
         # ----------------------------------------------------
 
     # Assemble binary for each commnand --------------------------
-    if instr == "NOT":
+    if instr == "BC" or instr == "BZ" or instr == "BNZ" or instr == "B":
+        imm_flag = "1"
+        r_dest = "000"
+        r_src1 = "000"
+        temp = 0
+        if operands[0].startswith('#'):
+            temp = int(operands[0][1:])
+        imm_or_r_src2 = imm_8b(temp)
+    elif instr == "NOT":
         # -- We found NOT ------------------------------------
         r_dest = reg_3b(operands[0])
         r_src1 = "000"
