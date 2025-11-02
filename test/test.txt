@@ -1,4 +1,4 @@
-MOV r0, #17
+MOV r0, #17 ; MOV YIPPIE
 MOV r1, #47
 ADD r2, r1, r0
 SUB r3, r1, r0
