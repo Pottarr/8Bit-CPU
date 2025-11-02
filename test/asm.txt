@@ -12,6 +12,7 @@ SUB r4, r4, #1
 SUB r5, r5, #1
 BNZ #6
 BC #16
-B #15
+BZ #15
+B #16
 MOV r6, #175
 MOV r7, #255

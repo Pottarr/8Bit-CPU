@@ -20,8 +20,8 @@
         </entry>
         <entry>
           <string>Data</string>
-          <data>44014,44814,45014,45814,46014,46814,54001,54901,55201,55b01,56401
-,56d01,78006,7c00f,470af,478ff</data>
+          <data>44003,44803,45003,45803,46003,46803,54001,54901,55201,55b01,56401
+,56d01,78006,70010,7400f,7c010,470af,478ff</data>
         </entry>
         <entry>
           <string>intFormat</string>
@@ -3688,7 +3688,7 @@ and detect for 10</string>
           <string>EX:NOP_{out}</string>
         </entry>
       </elementAttributes>
-      <pos x="1540" y="1780"/>
+      <pos x="1660" y="1760"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -3991,6 +3991,30 @@ and detect for 10</string>
       <elementName>Not</elementName>
       <elementAttributes/>
       <pos x="1040" y="1840"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Tunnel</elementName>
+      <elementAttributes>
+        <entry>
+          <string>rotation</string>
+          <rotation rotation="2"/>
+        </entry>
+        <entry>
+          <string>NetName</string>
+          <string>Go_Branch</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1540" y="1740"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Or</elementName>
+      <elementAttributes>
+        <entry>
+          <string>wideShape</string>
+          <boolean>true</boolean>
+        </entry>
+      </elementAttributes>
+      <pos x="1560" y="1740"/>
     </visualElement>
   </visualElements>
   <wires>
@@ -5055,6 +5079,10 @@ and detect for 10</string>
       <p2 x="1260" y="1740"/>
     </wire>
     <wire>
+      <p1 x="1540" y="1740"/>
+      <p2 x="1560" y="1740"/>
+    </wire>
+    <wire>
       <p1 x="-1260" y="460"/>
       <p2 x="-1240" y="460"/>
     </wire>
@@ -5161,6 +5189,10 @@ and detect for 10</string>
     <wire>
       <p1 x="1180" y="1760"/>
       <p2 x="1200" y="1760"/>
+    </wire>
+    <wire>
+      <p1 x="1640" y="1760"/>
+      <p2 x="1660" y="1760"/>
     </wire>
     <wire>
       <p1 x="1160" y="480"/>
@@ -5272,7 +5304,7 @@ and detect for 10</string>
     </wire>
     <wire>
       <p1 x="1500" y="1780"/>
-      <p2 x="1540" y="1780"/>
+      <p2 x="1560" y="1780"/>
     </wire>
     <wire>
       <p1 x="-620" y="2040"/>
