@@ -1,4 +1,4 @@
-# ----------------- Assembly to 19-bit Hex Converter -----------------
+# ----------------- Assembly to 1 + 19-bit Hex Converter -----------------
 # converter.py
 
 import sys
@@ -102,7 +102,7 @@ def assemble_binary(line: str) -> str:
         return ""
     # ------------------------------------------------------------
 
-    return f"{imm_flag}{opcode}{r_dest}{r_src1}{imm_or_r_src2}"
+    return f"1{imm_flag}{opcode}{r_dest}{r_src1}{imm_or_r_src2}"
 
 def binary_to_hex(bin_str: str) -> str:
     """Convert binary string to hex (uppercase, no prefix)."""
