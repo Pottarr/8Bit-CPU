@@ -32,7 +32,7 @@
 	\vspace{1cm}
 	{\LARGE \textbf{8 Bits CPU Simulation Documentation}} \\[0.5cm]
 	\vspace{0.5cm}
-	{\large \textbf{Compter Organization and Architecture}} \\[0.5cm]
+	{\large \textbf{Compter Architecture and Organization}} \\[0.5cm]
 	{\large \textbf{Software Engineering Program,}} \\[0.5cm]
 	{\large \textbf{Department of Computer Engineering,}} \\[0.5cm]
 	{\large \textbf{School of Engineering, KMITL}} \\[1cm]
@@ -43,26 +43,38 @@
 % Preface page
 \chapter*{Preface}
 
-Hello, World! \\
-Line 1 \\
-Line 2 \\
-Line 3 \\
-Line 4 \\
-Line 5 \\
-
+This project, Design and Implementation of a Minimal 8-Bit CPU, was
+undertaken as part of the Computer Architecture and Organization course
+in the second year of Bachelor of Software Engineering at KMITL.
+It represents a practical exploration of fundamental computer architecture
+concepts, from logic design to instruction execution. The project allowed
+us to apply theoretical knowledge of CPU structure, instruction sets,
+and pipelining into a fully simulated and functioning processor. Using
+the Digital simulator by Hneemann, we developed and verified a modular
+CPU that embodies the essence of real processor operation. This report
+documents the design process, implementation details, and lessons
+learned throughout the development cycle.
 
 \newpage
 
 % Abstract page
 \chapter*{Abstract}
 
-This project, titled QtGroove, presents the design and implementation of a music player
-application developed in the C++ programming language with Qt GUI framework. As part of the
-Object Oriented Programming course in Software Engineering at KMITL, QtGroove was created to develop
-a user-friendly multi-platform music player in C++ programming language that provide users with typical
-features found in general music player.
+This mini project focuses on the design and simulation of a minimal
+8-bit pipelined CPU using the Digital circuit simulation software.
+The CPU incorporates a five-stage pipeline—Fetch, Decode, Execute,
+Memory, and Write Back—and supports a custom instruction set architecture
+(ISA) with arithmetic, logical, branching, and I/O operations.
+The architecture features separate ROM and RAM modules, basic input
+and output ports, and a status register for flag management. Through
+simulation and test programs, the system demonstrates instruction
+execution, branching control, and interrupt handling. The project
+enhances understanding of CPU internals, digital logic integration,
+and the challenges of pipelined design, offering a hands-on approach 
+to fundamental architectural concepts.
 
 \newpage
+
 % Table of contents
 \tableofcontents
 \newpage
@@ -71,27 +83,64 @@ features found in general music player.
 \chapter{Introduction}
 \section{Project Overview}
 
+The 8-Bit CPU Simulation project aims to implement a simplified,
+educational model of a pipelined processor that captures the essential
+operations of modern CPUs while remaining manageable for simulation.
+The design follows a five-stage pipeline (Instruction Fetch,
+Instruction Decode, Execute, Memory, Write Back), allowing concurrent 
+instruction processing for improved efficiency.
 
-QtGroove is a graphic-based music player written in C++ using the Qt framework. The project
-aims to be a lightweight music player with a friendly user interface. 	
+The CPU operates with 8-bit data paths and addresses, includes
+general-purpose and a special register (flag status register), and
+separates program memory (ROM) from data memory (RAM). A custom
+instruction set defines all operations, including data transfer
+(LD, ST, MOV), arithmetic and logic (ADD, SUB, MUL, AND, OR, XOR, NOT),
+branching (BZ, BNZ, BC, B), and I/O handling (RD, WR). Interrupt support
+and optional features such as basic caching or branch prediction may 
+extend functionality.
 
-QtGroove will have the functions of a typical music player like a file browser, the ability to make
-playlists, showing music file info, and having a bit of extra functions like speed up playback or player
-customization.
+Simulation and verification are performed in Digital, emphasizing
+modularity, waveform analysis, and clear documentation.
 
+\newpage
 
 \section{Background}
-We wanted to created our own multi-platform GUI music player, which is efficience to navigate
-through the UI with low learning curve.
+
+Central Processing Units (CPUs) are the computational core of digital
+systems, responsible for executing instructions and managing data flow
+between memory and peripherals. Understanding how a CPU functions—from
+fetching an instruction to writing back results—is crucial in computer
+engineering education.
+
+Traditional classroom learning often focuses on theoretical aspects
+such as microarchitecture, ISA design, and pipelining, but lacks
+direct visualization of hardware behavior. This project bridges that
+gap by using the Digital simulator to implement a CPU from basic logic
+components. By designing each pipeline stage, students explore how
+control signals, registers, buses, and memory interact to form a
+functioning processor.
+
+The project serves as a foundational experience in CPU design, 
+illustrating key topics such as instruction decoding, data hazards,
+memory access timing, and modular circuit organization.
+
 
 \section{Objective}
-This project aims to create a lightweight and multi-platform music player as an alternative
-to other music players. The app can great for listening to local music files. The making of this app
-also serves as an experience for us to learn C++ and work with the qt framework.
 
-Since this is a duo project, it is a great opportunity to learn teamwork and strive to make the best
-products.
- 
+\begin{enumerate}
+    \item \textbf{To design and implement} an 8-bit pipelined CPU with a custom instruction set architecture (ISA) using the \textit{Digital} simulation environment.
+    
+    \item \textbf{To apply theoretical concepts} of CPU architecture, including pipeline stages, ALU operations, branching, and flag management, in a practical design.
+    
+    \item \textbf{To develop modular circuit components} (e.g., ALU, control unit, registers, and memory interfaces) that integrate seamlessly within the pipeline.
+    
+    \item \textbf{To simulate and verify} the CPU’s operation through test programs demonstrating arithmetic, logic, branching, stack, and interrupt handling.
+    
+    \item \textbf{To enhance understanding} of digital logic design, data path organization, and hardware–software interaction in CPU execution.
+    
+    \item \textbf{To document} the architecture, instruction formats, and verification results clearly and comprehensively for academic evaluation.
+\end{enumerate}
+
 \chapter{Project Overview}
 \section{Hardware Design}
 
@@ -193,7 +242,7 @@ We have created a user friendly multi-platform music player application.
 \chapter{Appendix}
 
 \section{Github Repository}
-\url{https://github.com/Pottarr/QtGroove}
-% \newpage
+\noindent \url{https://github.com/Pottarr/8Bit-CPU} \\
+\noindent \url{https://github.com/hneemann/Digital} \\
 
 \end{document}
