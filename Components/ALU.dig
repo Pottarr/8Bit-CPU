@@ -916,11 +916,11 @@
       <elementAttributes>
         <entry>
           <string>rotation</string>
-          <rotation reference="../../../../visualElement[61]/elementAttributes/entry/rotation"/>
+          <rotation rotation="2"/>
         </entry>
         <entry>
           <string>NetName</string>
-          <string>A</string>
+          <string>B</string>
         </entry>
       </elementAttributes>
       <pos x="-80" y="1080"/>

@@ -82,6 +82,14 @@ def assemble_binary(line: str) -> str:
         r_dest = reg_3b(operands[0])
         r_src1 = "000"
         imm_or_r_src2 = "00000" + reg_3b(operands[1])
+    elif instr == "ST":
+        r_src1 = reg_3b(operands[0])
+        op2 = operands[1]
+        if op2.startswith("#"):
+            imm_flag = "1"
+            imm_or_r_src2 = imm_8b(int(op2[1:]))
+        else:
+            imm_flag = "0"
     elif len(operands) == 2:
         # -- We found instruction which need 2 operands ------
         r_dest = reg_3b(operands[0])
