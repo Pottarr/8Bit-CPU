@@ -1,6 +1,7 @@
 \documentclass[12pt]{report}
 
 \usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{array}
 \usepackage{amsmath, amssymb}
 \usepackage{fancyhdr}
 \usepackage{graphicx}
@@ -129,15 +130,10 @@ memory access timing, and modular circuit organization.
 
 \begin{enumerate}
     \item \textbf{To design and implement} an 8-bit pipelined CPU with a custom instruction set architecture (ISA) using the \textit{Digital} simulation environment.
-    
     \item \textbf{To apply theoretical concepts} of CPU architecture, including pipeline stages, ALU operations, branching, and flag management, in a practical design.
-    
     \item \textbf{To develop modular circuit components} (e.g., ALU, control unit, registers, and memory interfaces) that integrate seamlessly within the pipeline.
-    
     \item \textbf{To simulate and verify} the CPU’s operation through test programs demonstrating arithmetic, logic, branching, stack, and interrupt handling.
-    
     \item \textbf{To enhance understanding} of digital logic design, data path organization, and hardware–software interaction in CPU execution.
-    
     \item \textbf{To document} the architecture, instruction formats, and verification results clearly and comprehensively for academic evaluation.
 \end{enumerate}
 
@@ -161,36 +157,57 @@ memory access timing, and modular circuit organization.
 
 \subsection{Instructions}
 
+\noindent Instruction Format (Length: 20 bits): \\
+$$Opcode [19:15]\ |\ IMM_{Flag} [14]\ |\ R_{Dest}\ [13:11]\ |\ R_{Src1}\ |\ R_{Src2} [2:0]\ or\ IMM [7:0]$$
+
 \begin{center}
-\scalebox{0.8}{
+\scalebox{0.6}{
 \[
+\setlength{\extrarowheight}{5pt} % Adds 5pt to each row's height
 \begin{array}{|l|l|l|}
 \hline
 \textbf{Instruction} & \textbf{Opcode + Fields} & \textbf{Description} \\[4pt]
 \hline
-
-
-LD & 0000 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] & \text{Load immediate into register} \\[4pt]
-MOV & 0001 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] or #IMM [7:0] & \text{Move data or immediate} \\[4pt]
-ST  & 0010 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] & \text{Store register to memory} \\[4pt]
-RD  & 0011 | IMM flag [18] | R_dest [13:11] | R_src1 [2:0] & \text{Read memory to register} \\[4pt]
-ADD & 0100 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Add two registers} \\[4pt]
-SUB & 0101 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Subtract two registers} \\[4pt]
-MUL & 0110 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Multiply two registers} \\[4pt]
-WR  & 0111 | IMM flag [18] | R_src1 [2:0] or #IMM [7:0] & \text{Write register to output} \\[4pt]
-AND & 1000 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise AND} \\[4pt]
-OR  & 1001 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise OR} \\[4pt]
-XOR & 1010 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise XOR} \\[4pt]
-NOT & 1011 | IMM flag [18] | R_dest [13:11] | R_src1 [10:8] | R_src2 [2:0] or #IMM [7:0] & \text{Bitwise NOT} \\[4pt]
-BC & 1100 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Branch if carry} \\[4pt]
-BZ  & 1101 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Branch if zero} \\[4pt]
-BNZ & 1110 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Branch if not zero} \\[4pt]
-B & 1111 | IMM flag [18] | R_check [13:11] | #IMM [7:0] & \text{Unconditional branch} \\[4pt]
+\text{Do in } IF & & \\
+NOP & 00000\ |\ IMM_{Flag} [14]\ |\ DC[13:0] & \text{No Operation} \\[4pt]
+\hline
+\text{Do in } EX_{ALU} & & \\
+ADD & 00100\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Addition} \\[4pt]
+SUB & 00101\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Subtraction} \\[4pt]
+MUL & 00110\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Multiplication} \\[4pt]
+AND & 01000\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise AND} \\[4pt]
+OR  & 01001\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise OR} \\[4pt]
+XOR & 01010\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise XOR} \\[4pt]
+NOT & 01011\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise NOT} \\[4pt]
+\hline
+\text{Do in } EX_{JUMP} & & \\
+BC & 10000\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Carry} \\[4pt]
+BZ  & 10001\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Zero} \\[4pt]
+BNZ & 10010\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Not Zero} \\[4pt]
+BNG & 10011\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Negative} \\[4pt]
+B & 10100\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Unconditional Branch} \\[4pt]
+\hline
+\text{Do in } ME_{Stack} & & \\
+PSH & 10110\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Push } R_{Src2} \text{ value into Stack} \\[4pt]
+POP & 10111\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Pop the top register value from the Stack} \\[4pt]
+\hline
+\text{Do in } ME_{I/O} & & \\
+RD  & 11000\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Read input value to register} \\[4pt]
+WR  & 11001\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Write value from register to output} \\[4pt]
+\hline
+\text{Do in } ME_{RAM} & & \\
+LD & 11100\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Load value from memory to register} \\[4pt]
+ST & 11101\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Store register to memory} \\[4pt]
+\hline
+\text{Do in } WB & & \\
+MOV & 11110\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_src1 [2:0]\ or\ #IMM [7:0] & \text{Move value from} R_{Src1} \text{ or } \#IMM \text{ into } R_{Src1} \\[4pt]
 \hline
 \end{array}
 \]
 }
 \end{center}
+
+\newpage
 
 \subsection{Assembler}
 
@@ -201,19 +218,19 @@ We had written an assembler in Python. \\
 \newpage
 
 \chapter{Installation and Execution Guide}
+
+\section{Prerequisites}
+\begin{itemize}
+    \item Have git install in your system
+    \item Have Hneemann's Digital installed in your system
+\end{itemize}
+
 \section{Git Clone from the Remote Repository}
 \begin{lstlisting}[language=Bash ,basicstyle=\footnotesize\ttfamily]
-git clone https://github.com/Pottarr/QtGroove.git
+git clone https://github.com/Pottarr/8Bit-CPU
 \end{lstlisting}
 
-After that open project in Qt Creator, and run the program.
-
-\section{Alternative way for Windows users}
-
-You can download pre-release version (v0.1) from GitHub too.
-(Link in Appendix)
-
-
+After that you can open the \texttt{CPU.dig} in through your Digital.
 
 % Chapter 4: Summary
 \chapter{Summary}
@@ -234,14 +251,15 @@ We have created a user friendly multi-platform music player application.
 \chapter{References}
 % Include your references here in the proper LaTeX format, or use a BibTeX file
 \begin{itemize}
-    \item Qt Group. (2025). \textit{Qt Documentation}. Retrieved from \url{https://doc.qt.io/}
+    \item AHhhhhhhhhhhhhhhhhhhhhhhhhhh
+
 \end{itemize}
 
 \newpage
 
 \chapter{Appendix}
 
-\section{Github Repository}
+\section{Github Repositories}
 \noindent \url{https://github.com/Pottarr/8Bit-CPU} \\
 \noindent \url{https://github.com/hneemann/Digital} \\
 

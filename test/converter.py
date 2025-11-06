@@ -1,25 +1,29 @@
-# ----------------- Assembly to 1 + 19-bit Hex Converter -----------------
+# ----------------- Assembly to 20-bit Hex Converter -----------------
 # converter.py
 
 import sys
 
 OPCODES = {
-    "LD":  "0000",
-    "MOV": "0001",
-    "ST":  "0010",
-    "RD":  "0011",
-    "ADD": "0100",
-    "SUB": "0101",
-    "MUL": "0110",
-    "WR":  "0111",
-    "AND": "1000",
-    "OR":  "1001",
-    "XOR": "1010",
-    "NOT": "1011",
-    "BC":  "1100",
-    "BZ":  "1101",
-    "BNZ": "1110",
-    "B":   "1111"
+    "NOP": "00000",
+    "ADD": "00100",
+    "SUB": "00101",
+    "MUL": "00110",
+    "AND": "01000",
+    "OR":  "01001",
+    "XOR": "01010",
+    "NOT": "01011",
+    "BC":  "10000",
+    "BZ":  "10001",
+    "BNZ": "10010",
+    "BNG": "10011",
+    "B":   "10100",
+    "PSH": "10110",
+    "POP": "10111",
+    "RD":  "11000",
+    "WR":  "11001",
+    "LD":  "11100",
+    "ST":  "11101",
+    "MOV": "11110"
 }
 
 def reg_3b(reg: str) -> str:
@@ -69,7 +73,18 @@ def assemble_binary(line: str) -> str:
         # ----------------------------------------------------
 
     # Assemble binary for each commnand --------------------------
-    if instr == "BC" or instr == "BZ" or instr == "BNZ" or instr == "B":
+    if instr == "PSH" or instr == "POP" or instr == "RD" or \
+        instr == "WR":
+        # -- We found instruction that require only ----------
+        # -- a register                             ----------
+        imm_flag = "1"
+        r_dest = "000"
+        r_src1 = "000"
+        imm_or_r_src2 = f"00000{operands[0]}"
+    if instr == "BC" or instr == "BZ" or instr == "BNZ" or \
+        instr == "BNG" or instr == "B":
+        # -- We found instruction that require only ----------
+        # --  a register or an immediate            ----------
         imm_flag = "1"
         r_dest = "000"
         r_src1 = "000"
@@ -120,8 +135,7 @@ def binary_to_hex(bin_str: str) -> str:
         return ""
     # ------------------------------------------------------------
     val = int(bin_str, 2)
-    hex_str = format(val, "05X")  # 19 bits fit in 5 hex digits
-                                  # (max 0x7FFFF)
+    hex_str = format(val, "05X")
     return hex_str
 
 def cli_args_collect() -> list[str]:
