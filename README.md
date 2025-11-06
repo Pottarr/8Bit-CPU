@@ -6,66 +6,94 @@
 
 ## [Documentation](doc/Documentation.pdf)
 
-## Plan
+## Specification
 
 ### Overview
 
-- 8 bits size registers
+- 8 bits size memory
 - 8 accessible registers `R0` - `R7`
-- At most 16 Opcodes
+- 20 bits size instruction
+- Support 5 Stages of Pipeline
+- Provided Solution for Pipeline Hazards
+- Support Stack
+- Support 8 bits I/O
+- Branch Prediction: Assume Not Taken as Default
+- Provided Assembler as [compiler.py](test/compiler.py)
 
-### Components checklist
+### Components
 
-- [ ] PC
-- [ ] ROM
-- [ ] RAM
-- [ ] IR
-- [ ] CU
-- [ ] ALU
-    - [x] Adder
-    - [x] Subtractor
-    - [x] Multiplier
-    - [x] Divisor : Used Built-in
-    - [ ] Adaptation with CPSR
-- [ ] CPSR (Flags Register)
+- PC (Program Counter)
+- IR (Instruction Register: Using ROM (Read Only Memory))
+- RAM (Random Access Memory)
+- CU (Control Unit)
+- Register File
+- ALU (Arithmetic and Logic Unit)
+    - Adder
+    - Subtractor
+    - Multiplier
+    - AND
+    - OR
+    - XOR
+    - NOT
+- Flags Register
+- Forward Register
+- Stack Pointer Register
 
 ### Instruction Code
 
 #### General Instruction Code
 
-| Flags | ImmArg | OpCode | EditFlag | Rdest | Rsrc | Imm |
-| :---: | :----: | :----: | :------: | :---: | :--: | :-: |
-| $A_{1}A_{2}A_{3}A_{4}$ | $0$ | $CCCC$ | $D$ | $EEE$ | $FFF$ | $GGGGGGGG$ |
+| Opcode| ImmFlag | EditFlag | Rdest | Rsrc1 | Imm/Rsrc2 |
+| :----: | :----: | :------: | :---: | :---: | :-------: |
+| $AAAAA$ | $B$ | $CCCC$ | $EEE$ | $FFF$ | $GGGGGHHH$ |
 
-Total bits: 24
-- $A_{n}$
-    - $A_{1} \rightarrow$ Zero Flag
-    - $A_{2} \rightarrow$ Signed Flag
-    - $A_{3} \rightarrow$ Carry Flag
-    - $A_{4} \rightarrow$ Overflow Flag
+Total bits: 20
 
-#### Memory Management Instruction Code
+$DC \rightarrow$ Don't care
 
-- MOV
-- LDR
-- STR
+#### Instruction Code
 
-| Flags | ImmArg | OpCode | EditFlag | Rdest | Rsrc | Imm |
-| :---: | :----: | :----: | :------: | :---: | :--: | :-: |
-| $A_{1}A_{2}A_{3}A_{4}$ | $0$ | $CCCC$ | $D$ | $EEE$ | $FFF$ | $00000000$ |
-| $A_{1}A_{2}A_{3}A_{4}$ | $1$ | $CCCC$ | $D$ | $EEE$ | $000$ | $GGGGGGGG$ |
+##### Do in $ID$
 
-#### Arithmetic Operation Instruction Code
+- NOP
+
+##### Do in $EX_{ALU}$
 
 - ADD
 - SUB
 - MUL
-- DIV
+- AND
+- OR
+- XOR
+- NOT
 
-| Flags | ImmArg | OpCode | EditFlag | Rdest | Rsrc | Imm |
-| :---: | :----: | :----: | :------: | :---: | :--: | :-: |
-| $A_{1}A_{2}A_{3}A_{4}$ | $0$ | $CCCC$ | $D$ | $EEE$ | $FFF$ | $GGGGGGGG$ |
-| $A_{1}A_{2}A_{3}A_{4}$ | $1$ | $CCCC$ | $D$ | $EEE$ | $FFF$ | $GGGGGGGG$ |
+##### Do in $EX_{JUMP}$
+
+- BC
+- BZ
+- BNZ
+- BNG
+- B
+
+##### Do in $ME_{Stack}$
+
+- PSH
+- POP
+
+##### Do in $ME_{I/O}$
+
+- RD
+- WR
+
+##### Do in $ME_{RAM}$
+
+- LD
+- ST
+
+##### Done in $ME_{RAM}$
+
+- MOV
+
 
 ### Contributers
 
