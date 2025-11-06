@@ -1,6 +1,6 @@
 \documentclass[12pt]{report}
 
-\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage[a4paper, margin=2.5cm]{geometry}
 \usepackage{array}
 \usepackage{amsmath, amssymb}
 \usepackage{fancyhdr}
@@ -18,7 +18,6 @@
 \setlength{\parskip}{5pt}
 
 \titlespacing*{\chapter}{0pt}{0.5cm}{0.5cm}
-
 \titlespacing*{\section}{0pt}{0.25cm}{0.25cm}
 
 \setlength{\cftbeforetoctitleskip}{1cm}
@@ -28,7 +27,7 @@
 
 \begin{titlepage}
 	\centering
-	\vspace{1cm}
+    \vspace*{\fill}
 	\includegraphics[width=0.3\textwidth]{./images/KMITL Logo.png} \\
 	\vspace{1cm}
 	{\LARGE \textbf{8 Bits CPU Simulation Documentation}} \\[0.5cm]
@@ -39,6 +38,8 @@
 	{\large \textbf{School of Engineering, KMITL}} \\[1cm]
 	{\Large 67011093 Chavit Sarutdeechaikul} \\[0.25cm]
     {\Large 67011352 Theepakorn Phayonrat}
+    \vspace*{5cm}
+    \vspace*{\fill}
 \end{titlepage}
 
 % Preface page
@@ -63,7 +64,7 @@ learned throughout the development cycle.
 
 This mini project focuses on the design and simulation of a minimal
 8-bit pipelined CPU using the Digital circuit simulation software.
-The CPU incorporates a five-stage pipeline—Fetch, Decode, Execute,
+The CPU incorporates a five-stage pipeline: Fetch, Decode, Execute,
 Memory, and Write Back—and supports a custom instruction set architecture
 (ISA) with arithmetic, logical, branching, and I/O operations.
 The architecture features separate ROM and RAM modules, basic input
@@ -209,11 +210,23 @@ MOV & 11110\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_src1 [2:0]\ or\ #IMM 
 
 \newpage
 
+\subsection{Control Unit ROM Data}
+
+This is what we loaded into Control Unit (CU).
+
+\noindent \texttt{CU\_ROM.hex}
+
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{hex}{../test/CU_ROM.hex}
+
+\newpage
+
 \subsection{Assembler}
 
 We had written an assembler in Python. \\
 
-\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{py}{../test/converter.py}
+\noindent \texttt{compiler.py}
+
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{py}{../test/compiler.py}
 
 \newpage
 
@@ -231,19 +244,39 @@ git clone https://github.com/Pottarr/8Bit-CPU
 \end{lstlisting}
 
 After that you can open the \texttt{CPU.dig} in through your Digital.
+\section{Test Assembly Code}
+
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{}{../test/asm.ass}
 
 % Chapter 4: Summary
 \chapter{Summary}
+
+\section{Project Summary}
+
+The \textit{Design and Implementation of a Minimal 8-Bit CPU} project focuses on creating a functional pipelined processor using the \textit{Digital} simulation software. 
+This project integrates theoretical and practical knowledge of computer architecture by designing a five-stage pipelined CPU that executes a custom instruction set architecture (ISA). 
+It emphasizes modular design, digital logic integration, and simulation-based verification of CPU functionalities such as arithmetic operations, branching, and interrupt handling.
+
 \section{Learning Outcomes}
+
 \begin{itemize}
-    \item We have learnt fundamental of concepts of creating good UX and UI.
-    \item We have learnt how to develop multi-platform application using C++ Qt.
-    \item We have learnt the workflow of project developing.
-    \item We have learnt how to use Version Control to help developing application.
+    \item Successfully implemented a fully functional 8-bit pipelined CPU with distinct stages: Fetch, Decode, Execute, Memory, and Write Back.
+    \item Developed a custom instruction set architecture (ISA) supporting arithmetic, logic, branching, and I/O operations.
+    \item Designed and simulated essential CPU modules including the ALU, control unit, registers, and memory units (ROM and RAM).
+    \item Implemented flag registers (Zero, Non-Zero, Carry) to support conditional branching and status tracking.
+    \item Demonstrated interrupt handling and basic I/O communication using input and output ports.
+    \item Verified CPU functionality using test programs, simulation waveforms, and step-by-step execution tracing.
 \end{itemize}
 
-\section{Accomplishment}
-We have created a user friendly multi-platform music player application.
+\section*{Accomplishments}
+
+\begin{itemize}
+    \item Gained hands-on experience in digital logic and CPU design principles through simulation.
+    \item Applied theoretical knowledge of pipelining and instruction execution to a practical, working model.
+    \item Improved understanding of hardware design challenges such as data hazards and control flow management.
+    \item Strengthened teamwork, modular circuit design, and documentation skills.
+    \item Completed a comprehensive report and video demonstration showcasing CPU functionality and performance.
+\end{itemize}
 
 \newpage
 

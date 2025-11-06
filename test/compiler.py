@@ -1,40 +1,30 @@
 # ----------------- Assembly to 20-bit Hex Converter -----------------
-# converter.py
 
 import sys
 
 OPCODES = {
-    "NOP": "00000",
-    "ADD": "00100",
-    "SUB": "00101",
-    "MUL": "00110",
-    "AND": "01000",
-    "OR":  "01001",
-    "XOR": "01010",
-    "NOT": "01011",
-    "BC":  "10000",
-    "BZ":  "10001",
-    "BNZ": "10010",
-    "BNG": "10011",
-    "B":   "10100",
-    "PSH": "10110",
-    "POP": "10111",
-    "RD":  "11000",
-    "WR":  "11001",
-    "LD":  "11100",
-    "ST":  "11101",
-    "MOV": "11110"
+    "NOP": "00000", "ADD": "00100", "SUB": "00101", "MUL": "00110",
+    "AND": "01000", "OR":  "01001", "XOR": "01010", "NOT": "01011",
+    "BC":  "10000", "BZ":  "10001", "BNZ": "10010", "BNG": "10011",
+    "B":   "10100", "PSH": "10110", "POP": "10111", "RD":  "11000",
+    "WR":  "11001", "LD":  "11100", "ST":  "11101", "MOV": "11110"
 }
+
+
 
 def reg_3b(reg: str) -> str:
     """Convert rX to 3-bit binary (r0–r7)."""
     return format(int(reg.replace("r", "")), "03b")
 
+
+
 def imm_8b(value: int) -> str:
     """Convert immediate number to 8-bit binary."""
     return format(value & 0xFF, "08b")
 
-def assemble_binary(line: str) -> str:
+
+
+def assemble_binary(line: str) -> str | None:
     """Convert assembly line to 19-bit binary string."""
     
     # -- Remove comments while compiling -------------------------
@@ -122,21 +112,25 @@ def assemble_binary(line: str) -> str:
         imm_or_r_src2 = get_operand_bits(operands[2])
     else:
         # -- We found empty line -----------------------------
-        return ""
+        return None
     # ------------------------------------------------------------
 
     return f"1{imm_flag}{opcode}{r_dest}{r_src1}{imm_or_r_src2}"
 
-def binary_to_hex(bin_str: str) -> str:
+
+
+def binary_to_hex(bin_str: str | None) -> str | None:
     """Convert binary string to hex (uppercase, no prefix)."""
     # -- Check if we need to convert to Hex or not ---------------
     if not bin_str:
         # -- If it is a empty line ---------------------------
-        return ""
+        return None
     # ------------------------------------------------------------
     val = int(bin_str, 2)
     hex_str = format(val, "05X")
     return hex_str
+
+
 
 def cli_args_collect() -> list[str]:
     cli_args = sys.argv
@@ -146,7 +140,14 @@ def cli_args_collect() -> list[str]:
     elif 2 <= len(cli_args) <= 3:
         input_file = cli_args[1]
         try:
-            _ = input_file.split('.')
+            input_file_part = input_file.split('.')
+            try:
+                if input_file_part[1] != "ass":
+                    print("We need .ass file extension to convert.")
+                    sys.exit(1)
+            except IndexError:
+                print("We need .ass file extension to convert.")
+                sys.exit(1)
         except IndexError:
             output_file = f"{input_file}.hex"
         output_file = f"{input_file.split('.')[0]}.hex"
@@ -167,18 +168,21 @@ def cli_args_collect() -> list[str]:
     return [input_file, output_file]
 
 
+
 def main():
     [input_file, output_file] = cli_args_collect()
 
     with open(input_file, "r") as fin, open(output_file, "w") as fout:
         fout.write("v2.0 raw\n")
         for line in fin:
-            binary = assemble_binary(line)
-            if binary:
-                hex_val = binary_to_hex(binary)
-                fout.write(hex_val + "\n")
+            hex_val = binary_to_hex(assemble_binary(line))
+            if hex_val == None:
+                continue
+            fout.write(hex_val + "\n")
 
     print(f"Conversion complete. Hex output saved to '{output_file}'.")
+
+
 
 if __name__ == "__main__":
     main()
