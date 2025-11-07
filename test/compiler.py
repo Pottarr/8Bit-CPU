@@ -26,7 +26,7 @@ def imm_8b(value: int) -> str:
 
 def assemble_binary(line: str) -> str | None:
     """Convert assembly line to 19-bit binary string."""
-    
+
     # -- Remove comments while compiling -------------------------
     if ";" in line:
         line = line.split(';')[0]
@@ -63,15 +63,17 @@ def assemble_binary(line: str) -> str | None:
         # ----------------------------------------------------
 
     # Assemble binary for each commnand --------------------------
-    if instr == "PSH" or instr == "POP" or instr == "RD" or \
+    if instr == "NOP":
+        return "00000000000000000000"
+    elif instr == "PSH" or instr == "POP" or instr == "RD" or \
         instr == "WR":
         # -- We found instruction that require only ----------
         # -- a register                             ----------
-        imm_flag = "1"
+        imm_flag = "0"
         r_dest = "000"
         r_src1 = "000"
-        imm_or_r_src2 = f"00000{operands[0]}"
-    if instr == "BC" or instr == "BZ" or instr == "BNZ" or \
+        imm_or_r_src2 = f"00000{reg_3b(operands[0])}"
+    elif instr == "BC" or instr == "BZ" or instr == "BNZ" or \
         instr == "BNG" or instr == "B":
         # -- We found instruction that require only ----------
         # --  a register or an immediate            ----------
