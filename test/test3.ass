@@ -1,0 +1,20 @@
+MOV r0, #67
+PSH r0
+PSH r0
+PSH r0
+PSH r0
+PSH r0
+PSH r0
+PSH r0
+PSH r0  ; Stack reach warning point here
+POP r1  ; Warning disappear here
+POP r1
+POP r1
+POP r1
+POP r1
+POP r1
+POP r1
+POP r1 ; Stack Empty here
+POP r1 ; Will give 0
+POP r2 ; Will give 0
+POP r3 ; Will give 0
