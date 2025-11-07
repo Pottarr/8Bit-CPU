@@ -115,7 +115,7 @@ def assemble_binary(line: str) -> str | None:
         return None
     # ------------------------------------------------------------
 
-    return f"1{imm_flag}{opcode}{r_dest}{r_src1}{imm_or_r_src2}"
+    return f"{opcode}{imm_flag}{r_dest}{r_src1}{imm_or_r_src2}"
 
 
 

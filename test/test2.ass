@@ -1,12 +1,14 @@
-MOV r0, #17     ; 11
-MOV r1, #47     ; 2F
-ADD r2, r1, r0     ; 40
-SUB r3, r1, r0     ; 1E
+MOV r0, #17     	; 11 test for BNG and data dependency
+MOV r1, #47     	; 2F
+ADD r2, r1, r0     	; 40
+SUB r3, r1, r0     	; 1E
 ST  r3, #100
-LD  r1, #100     ; 00
-MUL r4, r1, #5     ; EB
-NOT r5, r4    ; 14
-AND r6, r5, r4    ; 00
-SUB r4, r4, #100; 87
-BNZ #9
-MOV r7, #255    ; FF
+LD  r1, #100     	; 00
+MUL r4, r1, #5     	; EB
+NOT r5, r4    		; 14
+AND r6, r5, r4    	; 00
+SUB r4, r4, #100	; 87
+BNG #12
+B #9
+MOV r7, #255    	; FF
+
