@@ -1,24 +1,15 @@
-MOV r0, #67 ; Test for stack
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0 ; Start Warning About the size
-PSH r0
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1 ; Start Warning EMPTY
-POP r1 ; Defined Unexpected Behaviour (will return Addr: 0xFF)
-POP r1
-POP r1
-POP r1
-POP r1
+MOV r0, #67     ; 0x43
+MOV r1, #5      ; 0x05
+MOV r2, #6      ; 0x05
+B #8            ; Jump to 0x08 to start PSH Loop
+POP r3          ; Stack will Empty @ 4th/___ (Hypothesis)
+SUB r2, #1      ; After Stack is empty
+BNZ #4          ; It is set pop out value to be the value of 0xFF address in RAM
+B #14           ; Jump to 0x0E to finish
+PSH r0          ; Stack will start Warning about size @ 4th/___ (Hypothesis)
+PSH r1          ; By that time Stack: 0x43, 0x04, 0x45, 0x03, 0x47, 0x02, 0x49, 0x01
+SUB r1, r1, #1  ; But will continue until loops end
+ADD r0, r0, #2  ; By that tim Stack: 0x43, 0x04, 0x45, 0x03, 0x47, 0x02, 0x49, 0x01, 0x4B, 0x00
+BNZ #2          ; Loop continue if NZ is still on
+B #4            ; Jump to 0x04 to start POP Loop
+MOV r7, #255    ; End at PC: 0x0E

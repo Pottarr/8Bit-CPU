@@ -1,20 +1,13 @@
-MOV r0, #67
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0
-PSH r0  ; Stack reach warning point here
-POP r1  ; Warning disappear here
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1
-POP r1 ; Stack Empty here
-POP r1 ; Will give 0
-POP r2 ; Will give 0
-POP r3 ; Will give 0
+MOV r0, #17         ; 0x11 @ 0x05 in WB, Test for BNG and Hazard in EX, ME and WB stages
+MOV r1, #47         ; 0x2F @ 0x06 in WB, PS: After @ are value of PC while observing
+ADD r2, r1, r0      ; 0x40 @ 0x07 in WB
+SUB r3, r1, r0      ; 0x1E @ 0x08 in WB
+ST  r3, #100        ; 0x1E @ 0x08 in ME
+LD  r1, #100        ; 0x1E @ 0x09 in WB
+MUL r4, r1, #5      ; 0xEB @ 0x0B in WB
+NOT r5, r4          ; 0x14 @ 0x0C in WB
+AND r6, r5, r4      ; 0x00 @ 0x0D in WB (Remain 0x00 as earlier)
+SUB r4, r4, #100    ; 0x87 @ 0x00 in WB, IR Addr: 0x09
+BNG #12             ; Taken @ 3rd/0x0C, Jump to IR 0x0C
+B #9                ; Taken @ 1st/0x0D 2nd/0x0D, Jump to IR 0x09
+MOV r7, #255        ; 0xFF @ 0x11, IR Addr: 0x0C
