@@ -1,14 +1,13 @@
-MOV r0, #17     	; 11 test for BNG and data dependency
-MOV r1, #47     	; 2F
-ADD r2, r1, r0     	; 40
-SUB r3, r1, r0     	; 1E
-ST  r3, #100
-LD  r1, #100     	; 00
-MUL r4, r1, #5     	; EB
-NOT r5, r4    		; 14
-AND r6, r5, r4    	; 00
-SUB r4, r4, #100	; 87
-BNG #12
-B #9
-MOV r7, #255    	; FF
-
+MOV r0, #17         ; 11 @ 5 in WB test for BNG and data dependency
+MOV r1, #47         ; 2F @ 6 in WB
+ADD r2, r1, r0      ; 40 @ 7 in WB
+SUB r3, r1, r0      ; 1E @ 8 in WB
+ST  r3, #100        ; 1E @ 8 in ME
+LD  r1, #100        ; 1E @ 9 in WB
+MUL r4, r1, #5      ; EB @ B in WB
+NOT r5, r4          ; 14 @ C in WB
+AND r6, r5, r4      ; 00 @ D in WB (Remain 0 as earlier)
+SUB r4, r4, #100    ; 87 @ 0 in WB  <- PC:9
+BNG #12             ; Taken @ 3/C
+B #9                ; Taken @ 1/D 2/D
+MOV r7, #255        ; FF @ 11 <- PC:C

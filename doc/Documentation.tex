@@ -10,6 +10,7 @@
 \usepackage{listings}
 \usepackage{lipsum}
 \usepackage{minted}
+\usepackage{rotating}
 \usepackage{tabularx}
 \usepackage{titlesec}
 \usepackage{tocloft}
@@ -310,5 +311,37 @@ It emphasizes modular design, digital logic integration, and simulation-based ve
 \section{Github Repositories}
 \noindent \url{https://github.com/Pottarr/8Bit-CPU} \\
 \noindent \url{https://github.com/hneemann/Digital} \\
+
+\section{Test Cases Pipeline Stages Demonstration}
+
+\subsection{Test 0}
+
+\subsection{Test 1}
+\newpage
+
+\subsection{Test 2}
+\rotatebox{-90}{
+      \[
+    \begin{array}{c|cccccccccccccccccccc}
+        \hline
+        I_{C} & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{B} & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{A} & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{9} & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{7} & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{6} & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{5} & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{4} & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ \\
+        I_{3} & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ \\
+        I_{2} & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ \\
+        I_{1} & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ \\
+        I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ \\
+        I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ \\
+        I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ \\
+        I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ \\
+        I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB \\
+    \end{array}
+    \]
+}
 
 \end{document}

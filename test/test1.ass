@@ -1,10 +1,3 @@
-MOV r0, #17 ; MOV YIPPIE
-MOV r1, #47
-ADD r2, r1, r0
-SUB r3, r1, r0
-LD  r1, r3
-MUL r4, r1, #5
-NOT r5, r4
-AND r6, r5, r4
-SUB r4, r4, #1
-BZ r4, #9
+MOV r0, #103    ; 67 @ 5 in WB
+B #3            ;
+
