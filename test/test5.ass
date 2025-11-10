@@ -1,7 +1,7 @@
-MOV r0, #43     ; Game name: Guess 67
-MOV r3, #0      ; Set Default Output
+MOV r0, #67     ; Game name: Guess 67
+MOV r3, #4      ; Set Default Output
 MOV r4, #103    ; Set Answer Output
-RD r1           ; Read input
+RD r1           ; INPUT READ @ 0x06 Read input
 WR r3           ; Default Output: 0x00
 SUB r2, r1, r0  ; Use ZF in ALU to compare guess and answer
 BZ #8           ; Jump to Answer Reveal

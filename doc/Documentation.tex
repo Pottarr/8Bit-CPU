@@ -281,6 +281,26 @@ The \textit{Design and Implementation of a Minimal 8-Bit CPU} project focuses on
 This project integrates theoretical and practical knowledge of computer architecture by designing a five-stage pipelined CPU that executes a custom instruction set architecture (ISA). 
 It emphasizes modular design, digital logic integration, and simulation-based verification of CPU functionalities such as arithmetic operations, branching, and interrupt handling.
 
+\section{Challenges faced with Solutions}
+\begin{center}
+    \setlength{\extrarowheight}{5pt} % Adds 5pt to each row's height
+    \begin{tabular}{| m{7.75cm} | m{7.75cm} |}
+        \hline
+        \textbf{Challenge} & \textbf{Solution} \\[4pt]
+        \hline
+        CU was too complex using MUX. & Use ROM in CU as signal provider instead. \\
+        \hline
+        Manually converting Assembly code into Binary code and insert line by line into IR was difficult. & Create a compiler to compile Assembly code to Hex code and load into the IR. \\
+        \hline
+        There were too many tangled cables in the circuit. & Use tunnel component to make the circuit more organize. \\
+        \hline
+        RD instruction needed very precise timing set input a value. & Make the input receive the input value available in the input port in that moment of execution. (Therefore, users can pre-input the value and wait for the instruction to execute.) \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\newpage
+
 \section{Learning Outcomes}
 
 \begin{itemize}
@@ -309,9 +329,7 @@ It emphasizes modular design, digital logic integration, and simulation-based ve
 % Include your references here in the proper LaTeX format, or use a BibTeX file
 \begin{itemize}
     \item  \href{https://github.com/Pottarr/KMITL-SE-Classes-Archive/blob/main/SE16/Year2/Semester1/Computer-Organization-and-Architecture/Digital%20Design%20and%20Computer%20Architecture%20ARM%20Edition.pdf}{Digital Design and Computer Architecture ARM Edition}
-    \item  \href{https://www.youtube.com/watch?v=6u2rzB3HtXM}{How to build a computer TUTORIAL
-}
-
+    \item  \href{https://www.youtube.com/watch?v=6u2rzB3HtXM}{How to build a computer TUTORIAL}
 \end{itemize}
 
 \newpage
