@@ -3,7 +3,7 @@ MOV r1, #5      ; 0x05
 MOV r2, #9      ; 0x05
 B #8            ; Jump to 0x08 to start PSH Loop
 POP r3          ; Stack will Empty @ 4th/___ (Hypothesis)
-SUB r2, r2, #1      ; After Stack is empty
+SUB r2, r2, #1  ; After Stack is empty
 BNZ #4          ; It is set pop out value to be the value of 0xFF address in RAM
 B #14           ; Jump to 0x0E to finish
 PSH r0          ; Stack will start Warning about size @ 4th/___ (Hypothesis)
