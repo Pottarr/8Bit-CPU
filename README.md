@@ -94,8 +94,11 @@ $DC \rightarrow$ Don't care
 
 - MOV
 
+### Future Plans
+
+- Implement Software Interrupt
 
 ### Contributers
 
-- [Theepakorn Phayonrat](https://github.com/Pottarr)
-- [Chawit Sarutdeechaikul](https://github.com/its-sentral)
+- [Theepakorn Phayonrat 67011352](https://github.com/Pottarr)
+- [Chawit Saritdeechaikul 67011093](https://github.com/its-sentral)

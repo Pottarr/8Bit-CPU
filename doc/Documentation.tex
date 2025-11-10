@@ -37,7 +37,7 @@
 	{\large \textbf{Software Engineering Program,}} \\[0.5cm]
 	{\large \textbf{Department of Computer Engineering,}} \\[0.5cm]
 	{\large \textbf{School of Engineering, KMITL}} \\[1cm]
-	{\Large 67011093 Chavit Sarutdeechaikul} \\[0.25cm]
+	{\Large 67011093 Chavit Saritdeechaikul} \\[0.25cm]
     {\Large 67011352 Theepakorn Phayonrat}
     \vspace*{5cm}
     \vspace*{\fill}
@@ -150,6 +150,29 @@ memory access timing, and modular circuit organization.
 \newpage
 
 \subsection{Pipeline States}
+
+\begin{enumerate}
+    \item \textbf{Instruction Fetch} (\texttt{IF}): The \textt{CPU}
+        fetch the instruction line by line from the ROM.
+    \item \textbf{Instruction Decode} (\texttt{ID}): The \texttt{CPU}
+        decode the instruction line we fetch from \texttt{IF} and
+        decode to extract each part of the instruction (e.g. $R_{Dest}$,
+        $R_{Src1}$, $R_{Src2}$, $\#IMM$) to be used in the later stages
+        of pipeline.
+    \item \textbf{Execute} (\texttt{EX}): Every instruction which does
+        not use the \texttt{RAM} are done here. The data can be forward
+        for the later instructions and can transfer to the later pipeline
+        stages too.
+    \item \textbf{Memory} (\texttt{ME}): The data that use \texttt{RAM}
+        are done here (e.g. \texttt{PSH}, \texttt{POP}, \texttt{LD},
+        \texttt{ST}). For the instructions with data as output, the
+        output will combine with the $R_{Dest}$ transferred from earlier
+        pipeline stages and transfer to \texttt{WB} stage.
+    \item \textbf{Write Back} (\texttt{WB}): The data transferred from
+        earlier stages are now ready to be written back to
+        \texttt{Register File}.
+
+\end{enumerate}
 
 \subsection{Pipeline Hazards Management}
 
@@ -312,7 +335,7 @@ It emphasizes modular design, digital logic integration, and simulation-based ve
     \item Verified CPU functionality using test programs, simulation waveforms, and step-by-step execution tracing.
 \end{itemize}
 
-\section*{Accomplishments}
+\section{Accomplishments}
 
 \begin{itemize}
     \item Gained hands-on experience in digital logic and CPU design principles through simulation.
@@ -321,6 +344,12 @@ It emphasizes modular design, digital logic integration, and simulation-based ve
     \item Strengthened teamwork, modular circuit design, and documentation skills.
     \item Completed a comprehensive report and video demonstration showcasing CPU functionality and performance.
 \end{itemize}
+
+\section{Further Development}
+
+We have planned to implement the SWI (Software Interrupt) into our CPU.
+But due to project time period was not enough, therefore we might implement
+it in the future.
 
 \newpage
 
