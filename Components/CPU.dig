@@ -31,7 +31,8 @@
         </entry>
         <entry>
           <string>Data</string>
-          <data>f4043,f5804,f6067,c0800,c8003,29100,8c008,a4003,c8004</data>
+          <data>f4043,f4805,f5009,a4008,b9800,2d201,94004,a400e,b0000,b0001,24002
+,2c901,94002,a4004,b0000,ba000,f78ff</data>
         </entry>
         <entry>
           <string>intFormat</string>
@@ -39,26 +40,6 @@
         </entry>
       </elementAttributes>
       <pos x="-400" y="500"/>
-    </visualElement>
-    <visualElement>
-      <elementName>In</elementName>
-      <elementAttributes>
-        <entry>
-          <string>Label</string>
-          <string>CLK</string>
-        </entry>
-      </elementAttributes>
-      <pos x="2300" y="2520"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Tunnel</elementName>
-      <elementAttributes>
-        <entry>
-          <string>NetName</string>
-          <string>CLK</string>
-        </entry>
-      </elementAttributes>
-      <pos x="2320" y="2520"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -180,7 +161,7 @@
           <string>EX:ALU_{Out}</string>
         </entry>
       </elementAttributes>
-      <pos x="920" y="1700"/>
+      <pos x="920" y="1720"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -473,7 +454,7 @@
       <elementAttributes>
         <entry>
           <string>rotation</string>
-          <rotation reference="../../../../visualElement[31]/elementAttributes/entry/rotation"/>
+          <rotation reference="../../../../visualElement[29]/elementAttributes/entry/rotation"/>
         </entry>
         <entry>
           <string>NetName</string>
@@ -3138,7 +3119,7 @@ SMTH_{Choice}:
           <int>33</int>
         </entry>
       </elementAttributes>
-      <pos x="-60" y="2340"/>
+      <pos x="-60" y="2320"/>
     </visualElement>
     <visualElement>
       <elementName>Splitter</elementName>
@@ -3384,7 +3365,7 @@ SMTH_{Choice}:
           <string>CLK</string>
         </entry>
       </elementAttributes>
-      <pos x="480" y="300"/>
+      <pos x="380" y="300"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -3422,7 +3403,7 @@ SMTH_{Choice}:
           <string>ID:StackPtr_{Out}</string>
         </entry>
       </elementAttributes>
-      <pos x="680" y="300"/>
+      <pos x="640" y="300"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -3476,7 +3457,7 @@ SMTH_{Choice}:
         </entry>
         <entry>
           <string>NetName</string>
-          <string>EX:ALU_{Out}</string>
+          <string>EX:StackPtr_{In}</string>
         </entry>
       </elementAttributes>
       <pos x="460" y="280"/>
@@ -3625,7 +3606,7 @@ SMTH_{Choice}:
         </entry>
         <entry>
           <string>Bits</string>
-          <int>8</int>
+          <int>16</int>
         </entry>
       </elementAttributes>
       <pos x="1800" y="1760"/>
@@ -3642,7 +3623,7 @@ SMTH_{Choice}:
           <string>ID/EX_{Stack_{Out}}</string>
         </entry>
       </elementAttributes>
-      <pos x="1620" y="1760"/>
+      <pos x="1520" y="1760"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -3685,7 +3666,7 @@ SMTH_{Choice}:
           <string>EX/ME_{Stack_{Out}}</string>
         </entry>
       </elementAttributes>
-      <pos x="300" y="2540"/>
+      <pos x="140" y="2560"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -3957,7 +3938,7 @@ SMTH_{Choice}:
           <string>8,1</string>
         </entry>
       </elementAttributes>
-      <pos x="1640" y="1760"/>
+      <pos x="1540" y="1760"/>
     </visualElement>
     <visualElement>
       <elementName>Splitter</elementName>
@@ -4011,34 +3992,6 @@ SMTH_{Choice}:
       <elementName>Not</elementName>
       <elementAttributes/>
       <pos x="-480" y="1140"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Multiplexer</elementName>
-      <elementAttributes>
-        <entry>
-          <string>Bits</string>
-          <int>8</int>
-        </entry>
-        <entry>
-          <string>flipSelPos</string>
-          <boolean>true</boolean>
-        </entry>
-      </elementAttributes>
-      <pos x="840" y="1680"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Const</elementName>
-      <elementAttributes>
-        <entry>
-          <string>Value</string>
-          <long>0</long>
-        </entry>
-        <entry>
-          <string>Bits</string>
-          <int>8</int>
-        </entry>
-      </elementAttributes>
-      <pos x="820" y="1680"/>
     </visualElement>
     <visualElement>
       <elementName>Not</elementName>
@@ -4150,21 +4103,7 @@ POP ChangePTR -&gt; OUT</string>
           <string>EX/ME_{Stack_{Addr}}</string>
         </entry>
       </elementAttributes>
-      <pos x="280" y="2360"/>
-    </visualElement>
-    <visualElement>
-      <elementName>Tunnel</elementName>
-      <elementAttributes>
-        <entry>
-          <string>rotation</string>
-          <rotation rotation="2"/>
-        </entry>
-        <entry>
-          <string>NetName</string>
-          <string>EX/ME_{Stack_{Out}}</string>
-        </entry>
-      </elementAttributes>
-      <pos x="300" y="2580"/>
+      <pos x="180" y="2360"/>
     </visualElement>
     <visualElement>
       <elementName>Multiplexer</elementName>
@@ -4188,7 +4127,7 @@ POP ChangePTR -&gt; OUT</string>
           <string>ME:SMTH_{Choice}</string>
         </entry>
       </elementAttributes>
-      <pos x="120" y="2640"/>
+      <pos x="140" y="2640"/>
     </visualElement>
     <visualElement>
       <elementName>Splitter</elementName>
@@ -4202,7 +4141,7 @@ POP ChangePTR -&gt; OUT</string>
           <string>1,2</string>
         </entry>
       </elementAttributes>
-      <pos x="140" y="2640"/>
+      <pos x="160" y="2640"/>
     </visualElement>
     <visualElement>
       <elementName>Tunnel</elementName>
@@ -6152,12 +6091,12 @@ SMTH_{Choice}:
       <elementName>Splitter</elementName>
       <elementAttributes>
         <entry>
-          <string>Input Splitting</string>
-          <string>7</string>
-        </entry>
-        <entry>
           <string>mirror</string>
           <boolean>true</boolean>
+        </entry>
+        <entry>
+          <string>Input Splitting</string>
+          <string>7</string>
         </entry>
         <entry>
           <string>Output Splitting</string>
@@ -6386,11 +6325,6 @@ SMTH_{Choice}:
       <pos x="-440" y="1540"/>
     </visualElement>
     <visualElement>
-      <elementName>Const</elementName>
-      <elementAttributes/>
-      <pos x="-520" y="1520"/>
-    </visualElement>
-    <visualElement>
       <elementName>Splitter</elementName>
       <elementAttributes>
         <entry>
@@ -6482,7 +6416,7 @@ SMTH_{Choice}:
           <string>ME:Do_{PSH}</string>
         </entry>
       </elementAttributes>
-      <pos x="1800" y="2680"/>
+      <pos x="1840" y="2900"/>
     </visualElement>
     <visualElement>
       <elementName>Not</elementName>
@@ -6561,7 +6495,7 @@ SMTH_{Choice}:
       <elementAttributes>
         <entry>
           <string>rotation</string>
-          <rotation reference="../../../../visualElement[534]/elementAttributes/entry/rotation"/>
+          <rotation reference="../../../../visualElement[528]/elementAttributes/entry/rotation"/>
         </entry>
       </elementAttributes>
       <pos x="1960" y="2560"/>
@@ -6682,6 +6616,140 @@ SMTH_{Choice}:
       </elementAttributes>
       <pos x="-460" y="1920"/>
     </visualElement>
+    <visualElement>
+      <elementName>Register</elementName>
+      <elementAttributes/>
+      <pos x="1860" y="2900"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Const</elementName>
+      <elementAttributes/>
+      <pos x="1840" y="2940"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Tunnel</elementName>
+      <elementAttributes>
+        <entry>
+          <string>rotation</string>
+          <rotation rotation="2"/>
+        </entry>
+        <entry>
+          <string>NetName</string>
+          <string>CLK</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1840" y="2920"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Demultiplexer</elementName>
+      <elementAttributes>
+        <entry>
+          <string>flipSelPos</string>
+          <boolean>true</boolean>
+        </entry>
+        <entry>
+          <string>Bits</string>
+          <int>8</int>
+        </entry>
+      </elementAttributes>
+      <pos x="860" y="1680"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Tunnel</elementName>
+      <elementAttributes>
+        <entry>
+          <string>NetName</string>
+          <string>EX:StackPtr_{In}</string>
+        </entry>
+      </elementAttributes>
+      <pos x="920" y="1680"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Not</elementName>
+      <elementAttributes/>
+      <pos x="420" y="300"/>
+    </visualElement>
+    <visualElement>
+      <elementName>In</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Label</string>
+          <string>CLK</string>
+        </entry>
+      </elementAttributes>
+      <pos x="2300" y="2520"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Tunnel</elementName>
+      <elementAttributes>
+        <entry>
+          <string>NetName</string>
+          <string>CLK</string>
+        </entry>
+      </elementAttributes>
+      <pos x="2320" y="2520"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Tunnel</elementName>
+      <elementAttributes>
+        <entry>
+          <string>rotation</string>
+          <rotation rotation="2"/>
+        </entry>
+        <entry>
+          <string>NetName</string>
+          <string>EX:I/O|Mov_{EN}</string>
+        </entry>
+      </elementAttributes>
+      <pos x="-520" y="1500"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Splitter</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Input Splitting</string>
+          <string>8,8</string>
+        </entry>
+        <entry>
+          <string>Output Splitting</string>
+          <string>16</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1620" y="1760"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Splitter</elementName>
+      <elementAttributes>
+        <entry>
+          <string>Input Splitting</string>
+          <string>16</string>
+        </entry>
+        <entry>
+          <string>Output Splitting</string>
+          <string>8,8</string>
+        </entry>
+      </elementAttributes>
+      <pos x="160" y="2560"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Not</elementName>
+      <elementAttributes/>
+      <pos x="240" y="2640"/>
+    </visualElement>
+    <visualElement>
+      <elementName>Tunnel</elementName>
+      <elementAttributes>
+        <entry>
+          <string>rotation</string>
+          <rotation rotation="2"/>
+        </entry>
+        <entry>
+          <string>NetName</string>
+          <string>ID:StackPtr_{Out}</string>
+        </entry>
+      </elementAttributes>
+      <pos x="1520" y="1800"/>
+    </visualElement>
   </visualElements>
   <wires>
     <wire>
@@ -6723,6 +6791,14 @@ SMTH_{Choice}:
     <wire>
       <p1 x="1840" y="2560"/>
       <p2 x="1860" y="2560"/>
+    </wire>
+    <wire>
+      <p1 x="180" y="2560"/>
+      <p2 x="220" y="2560"/>
+    </wire>
+    <wire>
+      <p1 x="140" y="2560"/>
+      <p2 x="160" y="2560"/>
     </wire>
     <wire>
       <p1 x="1780" y="1540"/>
@@ -6813,6 +6889,10 @@ SMTH_{Choice}:
       <p2 x="-280" y="1800"/>
     </wire>
     <wire>
+      <p1 x="1520" y="1800"/>
+      <p2 x="1600" y="1800"/>
+    </wire>
+    <wire>
       <p1 x="340" y="2060"/>
       <p2 x="420" y="2060"/>
     </wire>
@@ -6877,7 +6957,7 @@ SMTH_{Choice}:
       <p2 x="-360" y="1300"/>
     </wire>
     <wire>
-      <p1 x="300" y="2580"/>
+      <p1 x="180" y="2580"/>
       <p2 x="320" y="2580"/>
     </wire>
     <wire>
@@ -7073,16 +7153,20 @@ SMTH_{Choice}:
       <p2 x="1260" y="300"/>
     </wire>
     <wire>
-      <p1 x="480" y="300"/>
-      <p2 x="500" y="300"/>
-    </wire>
-    <wire>
       <p1 x="560" y="300"/>
       <p2 x="600" y="300"/>
     </wire>
     <wire>
+      <p1 x="460" y="300"/>
+      <p2 x="500" y="300"/>
+    </wire>
+    <wire>
+      <p1 x="380" y="300"/>
+      <p2 x="420" y="300"/>
+    </wire>
+    <wire>
       <p1 x="600" y="300"/>
-      <p2 x="680" y="300"/>
+      <p2 x="640" y="300"/>
     </wire>
     <wire>
       <p1 x="420" y="1840"/>
@@ -7165,7 +7249,7 @@ SMTH_{Choice}:
       <p2 x="960" y="820"/>
     </wire>
     <wire>
-      <p1 x="280" y="2360"/>
+      <p1 x="180" y="2360"/>
       <p2 x="320" y="2360"/>
     </wire>
     <wire>
@@ -7357,12 +7441,8 @@ SMTH_{Choice}:
       <p2 x="-220" y="2640"/>
     </wire>
     <wire>
-      <p1 x="160" y="2640"/>
-      <p2 x="340" y="2640"/>
-    </wire>
-    <wire>
-      <p1 x="120" y="2640"/>
-      <p2 x="140" y="2640"/>
+      <p1 x="140" y="2640"/>
+      <p2 x="160" y="2640"/>
     </wire>
     <wire>
       <p1 x="1760" y="2640"/>
@@ -7371,6 +7451,14 @@ SMTH_{Choice}:
     <wire>
       <p1 x="2300" y="2640"/>
       <p2 x="2320" y="2640"/>
+    </wire>
+    <wire>
+      <p1 x="280" y="2640"/>
+      <p2 x="340" y="2640"/>
+    </wire>
+    <wire>
+      <p1 x="180" y="2640"/>
+      <p2 x="240" y="2640"/>
     </wire>
     <wire>
       <p1 x="1340" y="1620"/>
@@ -7399,6 +7487,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="1700" y="2900"/>
       <p2 x="1740" y="2900"/>
+    </wire>
+    <wire>
+      <p1 x="1840" y="2900"/>
+      <p2 x="1860" y="2900"/>
     </wire>
     <wire>
       <p1 x="820" y="1880"/>
@@ -7565,6 +7657,14 @@ SMTH_{Choice}:
       <p2 x="1580" y="2920"/>
     </wire>
     <wire>
+      <p1 x="1840" y="2920"/>
+      <p2 x="1860" y="2920"/>
+    </wire>
+    <wire>
+      <p1 x="1920" y="2920"/>
+      <p2 x="1960" y="2920"/>
+    </wire>
+    <wire>
       <p1 x="-460" y="1900"/>
       <p2 x="-440" y="1900"/>
     </wire>
@@ -7615,6 +7715,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="-120" y="2160"/>
       <p2 x="300" y="2160"/>
+    </wire>
+    <wire>
+      <p1 x="-220" y="2160"/>
+      <p2 x="-180" y="2160"/>
     </wire>
     <wire>
       <p1 x="160" y="1140"/>
@@ -7709,10 +7813,6 @@ SMTH_{Choice}:
       <p2 x="1400" y="1400"/>
     </wire>
     <wire>
-      <p1 x="840" y="1660"/>
-      <p2 x="860" y="1660"/>
-    </wire>
-    <wire>
       <p1 x="780" y="1660"/>
       <p2 x="800" y="1660"/>
     </wire>
@@ -7723,6 +7823,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="1780" y="1660"/>
       <p2 x="1800" y="1660"/>
+    </wire>
+    <wire>
+      <p1 x="840" y="1660"/>
+      <p2 x="880" y="1660"/>
     </wire>
     <wire>
       <p1 x="1140" y="380"/>
@@ -7739,6 +7843,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="1480" y="2940"/>
       <p2 x="1500" y="2940"/>
+    </wire>
+    <wire>
+      <p1 x="1840" y="2940"/>
+      <p2 x="1860" y="2940"/>
     </wire>
     <wire>
       <p1 x="420" y="1920"/>
@@ -7786,7 +7894,7 @@ SMTH_{Choice}:
     </wire>
     <wire>
       <p1 x="-220" y="2180"/>
-      <p2 x="-180" y="2180"/>
+      <p2 x="-100" y="2180"/>
     </wire>
     <wire>
       <p1 x="340" y="2180"/>
@@ -7795,10 +7903,6 @@ SMTH_{Choice}:
     <wire>
       <p1 x="1700" y="2180"/>
       <p2 x="1740" y="2180"/>
-    </wire>
-    <wire>
-      <p1 x="-180" y="2180"/>
-      <p2 x="-100" y="2180"/>
     </wire>
     <wire>
       <p1 x="-620" y="900"/>
@@ -7901,12 +8005,12 @@ SMTH_{Choice}:
       <p2 x="1340" y="2700"/>
     </wire>
     <wire>
-      <p1 x="820" y="1680"/>
-      <p2 x="840" y="1680"/>
-    </wire>
-    <wire>
       <p1 x="-440" y="1680"/>
       <p2 x="-300" y="1680"/>
+    </wire>
+    <wire>
+      <p1 x="900" y="1680"/>
+      <p2 x="920" y="1680"/>
     </wire>
     <wire>
       <p1 x="820" y="400"/>
@@ -8053,6 +8157,10 @@ SMTH_{Choice}:
       <p2 x="-540" y="2720"/>
     </wire>
     <wire>
+      <p1 x="1800" y="2720"/>
+      <p2 x="1960" y="2720"/>
+    </wire>
+    <wire>
       <p1 x="780" y="160"/>
       <p2 x="820" y="160"/>
     </wire>
@@ -8073,10 +8181,6 @@ SMTH_{Choice}:
       <p2 x="360" y="1700"/>
     </wire>
     <wire>
-      <p1 x="880" y="1700"/>
-      <p2 x="920" y="1700"/>
-    </wire>
-    <wire>
       <p1 x="-140" y="1700"/>
       <p2 x="-100" y="1700"/>
     </wire>
@@ -8087,6 +8191,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="-500" y="1700"/>
       <p2 x="-480" y="1700"/>
+    </wire>
+    <wire>
+      <p1 x="840" y="1700"/>
+      <p2 x="860" y="1700"/>
     </wire>
     <wire>
       <p1 x="980" y="420"/>
@@ -8263,6 +8371,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="-140" y="1720"/>
       <p2 x="-100" y="1720"/>
+    </wire>
+    <wire>
+      <p1 x="900" y="1720"/>
+      <p2 x="920" y="1720"/>
     </wire>
     <wire>
       <p1 x="660" y="440"/>
@@ -8525,10 +8637,6 @@ SMTH_{Choice}:
       <p2 x="-280" y="1240"/>
     </wire>
     <wire>
-      <p1 x="2300" y="2520"/>
-      <p2 x="2320" y="2520"/>
-    </wire>
-    <wire>
       <p1 x="1660" y="2520"/>
       <p2 x="1700" y="2520"/>
     </wire>
@@ -8543,6 +8651,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="1160" y="2520"/>
       <p2 x="1180" y="2520"/>
+    </wire>
+    <wire>
+      <p1 x="2300" y="2520"/>
+      <p2 x="2320" y="2520"/>
     </wire>
     <wire>
       <p1 x="60" y="1500"/>
@@ -8605,16 +8717,20 @@ SMTH_{Choice}:
       <p2 x="1380" y="1760"/>
     </wire>
     <wire>
-      <p1 x="1660" y="1760"/>
-      <p2 x="1800" y="1760"/>
-    </wire>
-    <wire>
-      <p1 x="1620" y="1760"/>
-      <p2 x="1640" y="1760"/>
+      <p1 x="1520" y="1760"/>
+      <p2 x="1540" y="1760"/>
     </wire>
     <wire>
       <p1 x="-320" y="1760"/>
       <p2 x="-280" y="1760"/>
+    </wire>
+    <wire>
+      <p1 x="1560" y="1760"/>
+      <p2 x="1620" y="1760"/>
+    </wire>
+    <wire>
+      <p1 x="1640" y="1760"/>
+      <p2 x="1800" y="1760"/>
     </wire>
     <wire>
       <p1 x="1020" y="480"/>
@@ -8665,7 +8781,7 @@ SMTH_{Choice}:
       <p2 x="1120" y="1260"/>
     </wire>
     <wire>
-      <p1 x="300" y="2540"/>
+      <p1 x="220" y="2540"/>
       <p2 x="320" y="2540"/>
     </wire>
     <wire>
@@ -8697,12 +8813,12 @@ SMTH_{Choice}:
       <p2 x="1880" y="1520"/>
     </wire>
     <wire>
-      <p1 x="-520" y="1520"/>
-      <p2 x="-500" y="1520"/>
-    </wire>
-    <wire>
       <p1 x="-660" y="1520"/>
       <p2 x="-620" y="1520"/>
+    </wire>
+    <wire>
+      <p1 x="-520" y="1520"/>
+      <p2 x="-500" y="1520"/>
     </wire>
     <wire>
       <p1 x="-320" y="1780"/>
@@ -8735,6 +8851,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="-480" y="1780"/>
       <p2 x="-460" y="1780"/>
+    </wire>
+    <wire>
+      <p1 x="1600" y="1780"/>
+      <p2 x="1620" y="1780"/>
     </wire>
     <wire>
       <p1 x="1100" y="500"/>
@@ -8837,12 +8957,20 @@ SMTH_{Choice}:
       <p2 x="-520" y="540"/>
     </wire>
     <wire>
+      <p1 x="-520" y="1500"/>
+      <p2 x="-520" y="1520"/>
+    </wire>
+    <wire>
       <p1 x="520" y="1440"/>
       <p2 x="520" y="1500"/>
     </wire>
     <wire>
       <p1 x="520" y="1500"/>
       <p2 x="520" y="1540"/>
+    </wire>
+    <wire>
+      <p1 x="1800" y="2680"/>
+      <p2 x="1800" y="2720"/>
     </wire>
     <wire>
       <p1 x="780" y="720"/>
@@ -8941,6 +9069,10 @@ SMTH_{Choice}:
       <p2 x="1320" y="1820"/>
     </wire>
     <wire>
+      <p1 x="1960" y="2720"/>
+      <p2 x="1960" y="2920"/>
+    </wire>
+    <wire>
       <p1 x="-300" y="1680"/>
       <p2 x="-300" y="1700"/>
     </wire>
@@ -8974,7 +9106,7 @@ SMTH_{Choice}:
     </wire>
     <wire>
       <p1 x="-180" y="2120"/>
-      <p2 x="-180" y="2180"/>
+      <p2 x="-180" y="2160"/>
     </wire>
     <wire>
       <p1 x="180" y="1460"/>
@@ -9041,6 +9173,10 @@ SMTH_{Choice}:
       <p2 x="320" y="2140"/>
     </wire>
     <wire>
+      <p1 x="1600" y="1780"/>
+      <p2 x="1600" y="1800"/>
+    </wire>
+    <wire>
       <p1 x="-580" y="520"/>
       <p2 x="-580" y="720"/>
     </wire>
@@ -9059,6 +9195,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="840" y="1380"/>
       <p2 x="840" y="1420"/>
+    </wire>
+    <wire>
+      <p1 x="840" y="1700"/>
+      <p2 x="840" y="1720"/>
     </wire>
     <wire>
       <p1 x="-460" y="1700"/>
@@ -9137,8 +9277,8 @@ SMTH_{Choice}:
       <p2 x="860" y="1760"/>
     </wire>
     <wire>
-      <p1 x="860" y="1660"/>
-      <p2 x="860" y="1680"/>
+      <p1 x="220" y="2540"/>
+      <p2 x="220" y="2560"/>
     </wire>
     <wire>
       <p1 x="1760" y="2640"/>
@@ -9191,6 +9331,10 @@ SMTH_{Choice}:
     <wire>
       <p1 x="-240" y="680"/>
       <p2 x="-240" y="820"/>
+    </wire>
+    <wire>
+      <p1 x="880" y="1660"/>
+      <p2 x="880" y="1680"/>
     </wire>
     <wire>
       <p1 x="500" y="1740"/>

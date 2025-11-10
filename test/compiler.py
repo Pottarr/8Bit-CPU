@@ -65,7 +65,7 @@ def assemble_binary(line: str) -> str | None:
     # Assemble binary for each commnand --------------------------
     if instr == "NOP":
         return "00000000000000000000"
-    elif instr == "PSH" or instr == "POP" or instr == "WR":
+    elif instr == "PSH" or instr == "WR":
         # -- We found instruction that require only ----------
         # -- a register                             ----------
         imm_flag = "0"
@@ -96,7 +96,7 @@ def assemble_binary(line: str) -> str | None:
             imm_or_r_src2 = imm_8b(int(op2[1:]))
         else:
             imm_flag = "0"
-    elif instr == "RD":
+    elif instr == "RD" or instr == "POP":
         r_dest = reg_3b(operands[0])
         imm_flag = "0"
         r_src1 = "000"
