@@ -144,12 +144,216 @@ memory access timing, and modular circuit organization.
 
 \subsection{Structure}
 
+\subsection{Overall Structure}
 
-\includegraphics[width=0.6\textwidth]{images/app_overview.png}
+\includegraphics[width=\textwidth]{images/CPU.png} \\
+
+\subsection{Pipeline Stages Dive Through}
+
+\textbf{Instruction Fetch Stage Part}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/IF.png} \\
+\end{center}
+
+Fetch instruction to the \texttt{IF/ID} pipeline to be used to decode
+in the next stage.
 
 \newpage
 
-\subsection{Pipeline States}
+\textbf{Instruction Decode Stage Part}
+
+\includegraphics[width=\textwidth]{images/ID.png} \\
+
+Decode the instruction and transfer to the \texttt{ID/EX} pipeline to
+execute in the next stage. In here, the system fetch the immediate
+value from the $R_{Dest}$ $R_{Src1}$, if the system detects the
+$IMM_{Check}$ is $0$ it also fetch immediate value from $R_{Src2}$
+(The last 3 bits of the 20 bit instruction). Else, the system takes
+the last 8 bits of the instruction as the immediate value for that
+instruction executing in the next stage.
+
+In the \texttt{Control Unit (CU)} we load the opcode into it and it
+output the execute signal for each opcode. \\
+
+\newpage
+
+\noindent \texttt{CU\_ROM.hex}
+
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{hex}{../test/CU_ROM.hex}
+
+\noindent Control Unit Signal Format (Length: 6 bits): \\
+$$NOP [5]\ | \ Do_{SMTH} [4:3]\ |\ SMTH_{Choice} [2:0]$$
+
+\begin{center}
+\scalebox{0.5}{
+\[
+\setlength{\extrarowheight}{5pt} % Adds 5pt to each row's height
+\begin{array}{|l|l|l|}
+\hline
+\textbf{Format} & \textbf{Signal} & \textbf{Description} \\[4pt]
+\hline
+Do_{Jump} \text{ Signal} &\ &\ \\
+Do_{BC} & 0\ 00\ 000 & BC \text{ in } EX:Do_{Jump} \\[2pt]
+Do_{BZ} & 0\ 00\ 001 & BZ \text{ in } EX:Do_{Jump} \\[2pt]
+Do_{BNZ} & 0\ 00\ 010 & BNZ \text{ in } EX:Do_{Jump} \\[2pt]
+Do_{BNG} & 0\ 00\ 011 & BNG \text{ in } EX:Do_{Jump} \\[2pt]
+Do_{B} & 0\ 00\ 100 & B \text{ in } EX:Do_{Jump} \\[2pt]
+\hline
+Do_{Math} \text{ Signal} &\ &\ \\
+Do_{ADD} & 0\ 01\ 000 & ADD \text{ in } EX:Do_{Math} \\[2pt]
+Do_{SUB} & 0\ 01\ 001 & SUB \text{ in } EX:Do_{Math} \\[2pt]
+Do_{MUL} & 0\ 01\ 010 & MUL \text{ in } EX:Do_{Math} \\[2pt]
+Do_{AND} & 0\ 01\ 100 & AND \text{ in } EX:Do_{Math} \\[2pt]
+Do_{OR} & 0\ 01\ 101 & OR \text{ in } EX:Do_{Math} \\[2pt]
+Do_{XOR} & 0\ 01\ 110 & XOR \text{ in } EX:Do_{Math} \\[2pt]
+Do_{NOT} & 0\ 01\ 111 & NOT \text{ in } EX:Do_{Math} \\[2pt]
+\hline
+Do_{Mem} \text{ Signal} &\ &\ \\
+Do_{LD} & 0\ 10\ 010 & XOR \text{ in } ME:Do_{RAM} \\[2pt]
+Do_{ST} & 0\ 10\ 011 & NOT \text{ in } ME:Do_{RAM} \\[2pt]
+Do_{POP} & 0\ 10\ 110 & XOR \text{ in } ME:Do_{Stack} \\[2pt]
+Do_{PSH} & 0\ 10\ 111 & NOT \text{ in } ME:Do_{Stack} \\[2pt]
+\hline
+Do_{I/O\|MOV} \text{ Signal} &\ &\ \\
+Do_{RD} & 0\ 10\ 010 & RD \text{ in } EX:Do_{I/O\|MOV} \\[2pt]
+Do_{WR} & 0\ 10\ 011 & WR \text{ in } EX:Do_{I/O\|MOV} \\[2pt]
+Do_{MOV} & 0\ 10\ 000 & MOV \text{ in } ME:Do_{I/O\|MOV} \text{, ready to write back in } WB \\[2pt]
+\hline
+\text{NOP Signal} &\ &\ \\
+NOP & 00000\ |\ DC [4:0] & \text{No Operation} \\[2pt]
+\hline
+\end{array}
+\]
+}
+\end{center}
+
+\newpage
+
+\textbf{Execute Stage Part}
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/EX.png} \\
+\end{center}
+
+\textbf{Memory Stage Part}
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/ME.png} \\
+\end{center}
+
+\textbf{Write Back Stage Part}
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/WB.png} \\
+\end{center}
+
+\subsection{Pipeline Transitions Dive Through}
+
+\textbf{IF/ID Transition Pipeline}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/IF-ID.png} \\
+\end{center}
+
+\textbf{ID/EX Transition Pipeline}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/ID-EX.png} \\
+\end{center}
+
+\textbf{EX/ME Transition Pipeline}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/EX-ME.png} \\
+\end{center}
+
+\textbf{ME/WB Transition Pipeline}
+
+\begin{center}
+\includegraphics[width=0.4\textwidth]{images/ME-WB.png} \\
+\end{center}
+
+\subsection{Other Parts Dive Through}
+
+\textbf{Program Counter and I/O Parts}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{images/PC-IO.png} \\
+\end{center}
+
+\subsection{Inner Components Dive Through}
+
+\textbf{ALU}
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/ALU.png} \\
+\end{center}
+
+Get the Decision choice value in 3 bits and 2, 8 bits data to
+calculate. The output result and flags are depended on the calculation.
+E.g. Using MUL may cause Overflow flag while SUB may cause Negative Flag.
+
+\newpage
+
+\textbf{Half Adder}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/half_adder.png} \\
+\end{center}
+
+Simplest form of 1 bit adder.
+
+\textbf{Full Adder}
+
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/full_adder.png} \\
+\end{center}
+
+1 bit adder that can have carry input.
+
+\textbf{8Bit Adder}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{images/8bits_adder.png} \\
+\end{center}
+
+8 Full Adders combine to make system available for 8 bits
+binary addition.
+
+\newpage
+
+\textbf{8Bit Multiplier}
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/8bits_multiplier.png} \\
+\end{center}
+
+Bit-shifting each line and add up together. If the value
+exceed 8 bits, it toggles Overflow Flag in the ALU.
+
+\textbf{Multiplier Helper}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{images/multiply_check_helper.png} \\
+\end{center}
+
+Help to set the binary ready before bit-shifting
+
+\newpage
+
+\textbf{Data Forwarding Register}
+
+\begin{center}
+\includegraphics[width=\textwidth]{images/forward_register.png} \\
+\end{center}
+
+Help to prevent Data Hazard if the earlier instructions have the same
+register used in the later instructions. It can be called from here.
+Every instruction result executed in EX and its destination register
+are stored here for a while then if in no used it drops.
+
+\subsection*{Pipeline States}
 
 \begin{enumerate}
     \item \textbf{Instruction Fetch} (\texttt{IF}): The \textt{CPU}
@@ -171,10 +375,22 @@ memory access timing, and modular circuit organization.
     \item \textbf{Write Back} (\texttt{WB}): The data transferred from
         earlier stages are now ready to be written back to
         \texttt{Register File}.
-
 \end{enumerate}
 
-\subsection{Pipeline Hazards Management}
+\subsection*{Pipeline Hazards Management}
+
+\begin{enumerate}
+    \item \textbf{Structural Hazards}: Fixed my 2 concepts
+        \begin{enumerate}
+            \item Calculation must be done before accessing RAM or WB stage
+            \item Accessing RAM with LD instruction will return value
+                therefore it must be done before WB stage.
+        \end{enumerate}
+    \item \textbf{Data Hazards}: Fixed by creating
+        \texttt{Data Forwarding Register}.
+    \item \textbf{Control Hazards}: If prediction is wrong the system
+        will the flush pipeline with \texttt{NOP}
+\end{enumerate}
 
 \newpage
 
@@ -212,17 +428,17 @@ BNZ & 10010\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0
 BNG & 10011\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Negative} \\[4pt]
 B & 10100\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Unconditional Branch} \\[4pt]
 \hline
-\text{Do in } ME_{Stack} & & \\
-PSH & 10110\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Push } R_{Src2} \text{ value into Stack} \\[4pt]
-POP & 10111\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Pop the top register value from the Stack} \\[4pt]
-\hline
-\text{Do in } ME_{I/O} & & \\
-RD  & 11000\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Read input value to register} \\[4pt]
-WR  & 11001\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Write value from register to output} \\[4pt]
+\text{Do in } EX_{I/O} & & \\
+RD  & 10110\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Read input value to register} \\[4pt]
+WR  & 10111\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Write value from register to output} \\[4pt]
 \hline
 \text{Do in } ME_{RAM} & & \\
-LD & 11100\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Load value from memory to register} \\[4pt]
-ST & 11101\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Store register to memory} \\[4pt]
+LD & 11000\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Load value from memory to register} \\[4pt]
+ST & 11001\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Store register to memory} \\[4pt]
+\hline
+\text{Do in } ME_{Stack} & & \\
+PSH & 11010\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Push } R_{Src2} \text{ value into Stack} \\[4pt]
+POP & 11011\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Pop the top register value from the Stack} \\[4pt]
 \hline
 \text{Do in } WB & & \\
 MOV & 11110\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_src1 [2:0]\ or\ #IMM [7:0] & \text{Move value from} R_{Src1} \text{ or } \#IMM \text{ into } R_{Src1} \\[4pt]
@@ -231,16 +447,6 @@ MOV & 11110\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_src1 [2:0]\ or\ #IMM 
 \]
 }
 \end{center}
-
-\newpage
-
-\subsection{Control Unit ROM Data}
-
-This is what we loaded into Control Unit (CU).
-
-\noindent \texttt{CU\_ROM.hex}
-
-\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{hex}{../test/CU_ROM.hex}
 
 \newpage
 
@@ -372,36 +578,5 @@ it in the future.
     \item This project repository: \url{https://github.com/Pottarr/8Bit-CPU}
     \item Helmut Neemann's Digital repository: \url{https://github.com/hneemann/Digital}
 \end{itemize}
-% \section{Test Cases Pipeline Stages Demonstration}
-%
-% \subsection{Test 0}
-%
-% \subsection{Test 1}
-% \newpage
-%
-% \subsection{Test 2}
-% \rotatebox{-90}{
-%       \[
-%     \begin{array}{c|cccccccccccccccccccc}
-%         \hline
-%         I_{C} & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{B} & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{A} & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{9} & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{7} & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{6} & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{5} & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{4} & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{3} & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ & \ \\
-%         I_{2} & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ & \ \\
-%         I_{1} & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ & \ \\
-%         I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ & \ \\
-%         I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ & \ \\
-%         I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ & \ \\
-%         I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB & \ \\
-%         I_{0} & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & \ & IF & ID & EX & ME & WB \\
-%     \end{array}
-%     \]
-% }
-%
+
 \end{document}

@@ -73,7 +73,7 @@
           </testData>
         </entry>
       </elementAttributes>
-      <pos x="-1600" y="20"/>
+      <pos x="-1380" y="260"/>
     </visualElement>
     <visualElement>
       <elementName>8bits_multiplier.dig</elementName>
@@ -963,7 +963,7 @@
           </testData>
         </entry>
       </elementAttributes>
-      <pos x="-1500" y="20"/>
+      <pos x="-1280" y="260"/>
     </visualElement>
     <visualElement>
       <elementName>Testcase</elementName>
@@ -982,7 +982,7 @@
           </testData>
         </entry>
       </elementAttributes>
-      <pos x="-1600" y="100"/>
+      <pos x="-1380" y="340"/>
     </visualElement>
     <visualElement>
       <elementName>Demultiplexer</elementName>
