@@ -2,12 +2,6 @@
 
 import sys
 
-
-# TODO:
-# Swap PSH POP
-# Arrange into this order EX:Do_{I/O} -> ME:Do_{RAM} -> ME:Do_{Stack}
-
-
 OPCODES = {
     "NOP": "00000", "ADD": "00100", "SUB": "00101", "MUL": "00110",
     "AND": "01000", "OR":  "01001", "XOR": "01010", "NOT": "01011",

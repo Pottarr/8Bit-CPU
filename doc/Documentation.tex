@@ -236,11 +236,40 @@ NOP & 1\ |\ DC [4:0] & \text{No Operation} \\[2pt]
 \includegraphics[width=\textwidth]{images/EX.png} \\
 \end{center}
 
+In this stage, each instruction has 4 choices, whether to go do the
+calculation in the \texttt{ALU} or do the branch taking or do
+the \texttt{I/O} process or to pass through without doing anything.
+
+If the instruction is a jump instruction (\texttt{BC} or \texttt{BZ} or
+\texttt{BNZ} or \texttt{BNG} or \texttt{B}), the system will start the
+pipeline flushing process by flushing the 2 instructions coming later in
+\texttt{IF} and \texttt{ID} stages and fill with \texttt{NOP} instruction
+to cleanup, then the system will fetch the instruction in the
+\texttt{Instruction Register} where address is equal to
+\texttt{Program Counter} value given in the instruction.
+
+\newpage
+
 \textbf{Memory Stage Part}
 
 \begin{center}
 \includegraphics[width=\textwidth]{images/ME.png} \\
 \end{center}
+
+In this stage each instruction has 3 choices, whether to pass through
+without doing anything, to load data into the \texttt{RAM} or to fetch
+data out from the \texttt{RAM}. If the instruction is either \texttt{LD}
+or \texttt{POP} the \texttt{RAM} outputs the data to the next stage.
+Else if the instruction is \texttt{ST} or \texttt{PSH} the \texttt{RAM}
+input data into the memory address given as the immediate or register
+to fetch address from.
+
+If the instruction is a stack instruction (\texttt{PSH} or \texttt{POP}),
+the data will load and fetch from the back most of the \texttt{RAM}
+and will increment or decrement the \texttt{Stack Pointer} base on the
+instruction.
+
+\newpage
 
 \textbf{Write Back Stage Part}
 
@@ -248,35 +277,30 @@ NOP & 1\ |\ DC [4:0] & \text{No Operation} \\[2pt]
 \includegraphics[width=\textwidth]{images/WB.png} \\
 \end{center}
 
-\subsection{Pipeline Transitions Dive Through}
-
-\textbf{IF/ID Transition Pipeline}
-
-\begin{center}
-\includegraphics[width=0.4\textwidth]{images/IF-ID.png} \\
-\end{center}
-
-\textbf{ID/EX Transition Pipeline}
-
-\begin{center}
-\includegraphics[width=0.4\textwidth]{images/ID-EX.png} \\
-\end{center}
-
-\textbf{EX/ME Transition Pipeline}
-
-\begin{center}
-\includegraphics[width=0.4\textwidth]{images/EX-ME.png} \\
-\end{center}
-
-\textbf{ME/WB Transition Pipeline}
-
-\begin{center}
-\includegraphics[width=0.4\textwidth]{images/ME-WB.png} \\
-\end{center}
+Once every data are processed in each pipeline stage, in \texttt{Wb}
+stage, they are now ready to be written back into the
+\texttt{Register File}. For the condition to enable the write
+back, the instruction needs to be either arithmetic or logic or
+\texttt{RD} or \texttt{LD} or \texttt{POP}. All of these instruction
+all give back value to be loaded into the register in the
+\texttt{Register File}.
 
 \newpage
 
-\subsection{Other Parts Dive Through}
+\subsection{Pipeline Buffers Dive Through}
+
+\begin{center}
+\includegraphics[height=0.225\paperheight]{images/IF-ID.png}
+\hfill
+\includegraphics[height=0.225\paperheight]{images/ID-EX.png}
+\hfill
+\includegraphics[height=0.225\paperheight]{images/EX-ME.png}
+\hfill
+\includegraphics[height=0.225\paperheight]{images/ME-WB.png}
+\end{center}
+
+Pipeline buffers are placed between stages to prevent data and control
+signals to overlap in each stage.\subsection{Other Parts Dive Through}
 
 \textbf{Program Counter and I/O Parts}
 

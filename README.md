@@ -1,5 +1,11 @@
 # 8Bits CPU Simulation
 
+This project was create as a final project for the Computer
+Architecture and Organization class of B.Eng. @ KMITL  
+For marking, please go to [this branch](https://github.com/Pottarr/8Bit-CPU/tree/Checkpoint).
+Other branches are for continuous development after the project was
+finished.
+
 ## Program used
 
 - [Digital](https://github.com/hneemann/Digital)
@@ -39,64 +45,12 @@
 - Forward Register
 - Stack Pointer Register
 
-### Instruction Code
-
-#### General Instruction Code
-
-| Opcode| ImmFlag | EditFlag | Rdest | Rsrc1 | Imm/Rsrc2 |
-| :----: | :----: | :------: | :---: | :---: | :-------: |
-| $AAAAA$ | $B$ | $CCCC$ | $EEE$ | $FFF$ | $GGGGGHHH$ |
-
-Total bits: 20
-
-$DC \rightarrow$ Don't care
-
-#### Instruction Code
-
-##### Do in $ID$
-
-- NOP
-
-##### Do in $EX_{ALU}$
-
-- ADD
-- SUB
-- MUL
-- AND
-- OR
-- XOR
-- NOT
-
-##### Do in $EX_{JUMP}$
-
-- BC
-- BZ
-- BNZ
-- BNG
-- B
-
-##### Do in $ME_{Stack}$
-
-- PSH
-- POP
-
-##### Do in $ME_{I/O}$
-
-- RD
-- WR
-
-##### Do in $ME_{RAM}$
-
-- LD
-- ST
-
-##### Done in $ME_{RAM}$
-
-- MOV
-
 ### Future Plans
 
 - Implement Software Interrupt
+- Expand to 32 bits
+
+### [Successor repository](https://github.com/Pottarr/32Bit-CPU)
 
 ### Contributers
 
