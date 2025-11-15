@@ -30,10 +30,6 @@
           <int>20</int>
         </entry>
         <entry>
-          <string>Data</string>
-          <data>f4043,f5804,f6067,c0800,c8003,29100,8c008,a4003,c8004</data>
-        </entry>
-        <entry>
           <string>intFormat</string>
           <intFormat>hex</intFormat>
         </entry>
@@ -971,7 +967,7 @@ SMTH_{Choice}: [2:0]</string>
         </entry>
         <entry>
           <string>Label</string>
-          <string>Do_{LD/ST}</string>
+          <string>Do_{RAM}</string>
         </entry>
         <entry>
           <string>RectWidth</string>
@@ -3045,7 +3041,7 @@ SMTH_{Choice}:
         </entry>
         <entry>
           <string>Label</string>
-          <string>Do_{PSH/POP}</string>
+          <string>Do_{Stack}</string>
         </entry>
         <entry>
           <string>RectWidth</string>
@@ -5680,10 +5676,10 @@ SMTH_{Choice}:
         </entry>
         <entry>
           <string>Description</string>
-          <string>Do_{SMTH}: 10
+          <string>Do_{SMTH}: 11
 SMTH_{Choice}:
-000: RD
-001: WR</string>
+010: RD
+011: WR</string>
         </entry>
       </elementAttributes>
       <pos x="-680" y="1280"/>
