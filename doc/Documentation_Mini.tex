@@ -1,0 +1,285 @@
+\documentclass[12pt]{report}
+
+\usepackage[a4paper, margin=2.5cm]{geometry}
+\usepackage{array}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{lipsum}
+\usepackage{minted}
+\usepackage{rotating}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{tocloft}
+
+\setlength{\parindent}{1cm}
+\setlength{\parskip}{5pt}
+
+\titlespacing*{\chapter}{0pt}{0.5cm}{0.5cm}
+\titlespacing*{\section}{0pt}{0.25cm}{0.25cm}
+
+\setlength{\cftbeforetoctitleskip}{1cm}
+\setlength{\cftaftertoctitleskip}{1cm}
+
+\begin{document}
+
+\begin{titlepage}
+	\centering
+    \vspace*{\fill}
+	\includegraphics[width=0.3\textwidth]{./images/KMITL Logo.png} \\
+	\vspace{1cm}
+	{\LARGE \textbf{8 Bits CPU Simulation Documentation}} \\[0.5cm]
+	\vspace{0.5cm}
+	{\large \textbf{Compter Architecture and Organization}} \\[0.5cm]
+	{\large \textbf{Software Engineering Program,}} \\[0.5cm]
+	{\large \textbf{Department of Computer Engineering,}} \\[0.5cm]
+	{\large \textbf{School of Engineering, KMITL}} \\[1cm]
+	{\Large 67011093 Chavit Saritdeechaikul} \\[0.25cm]
+    {\Large 67011352 Theepakorn Phayonrat}
+    \vspace*{5cm}
+    \vspace*{\fill}
+\end{titlepage}
+
+\chapter*{Project Overview}
+\section*{Hardware Design}
+
+\subsection*{Overall Structure}
+
+\includegraphics[width=0.6\textwidth]{images/CPU.png} \\
+
+\subsection*{Structure Dive Through}
+
+\textbf{Upper Part}
+
+\includegraphics[width=0.6\textwidth]{images/CPU_UPPER.png} \\
+
+\noindent Consist of Instruction Fetch stage and Instruction Decode stage.
+
+\newpage
+
+\textbf{Center Part}
+
+\includegraphics[width=0.6\textwidth]{images/CPU_CENTER.png} \\
+
+\noindent Consist of the whole Execute stage.
+
+\textbf{Lower Part}
+
+\includegraphics[width=0.6\textwidth]{images/CPU_LOWER.png} \\
+
+\noindent Consist of Memory stage and Write Back stage.
+
+\subsection*{Components Dive Through}
+
+\textbf{ALU}
+
+\includegraphics[width=0.6\textwidth]{images/ALU.png} \\
+
+\noindent Ge the Decision choice value in 3 bits and 2, 8 bits data to
+calculate. The output result and flags are depended on the calculation.
+E.g. Using MUL may cause Overflow flag while SUB may cause Negative Flag.
+
+\newpage
+
+\textbf{Half Adder}
+
+\includegraphics[width=0.6\textwidth]{images/Half_Adder.png} \\
+
+\noindent Simplest form of 1 bit adder.
+
+\textbf{Full Adder}
+
+\includegraphics[width=0.6\textwidth]{images/Full_Adder.png} \\
+
+\noindent 1 bit adder that can have carry input.
+
+\textbf{8Bit Adder}
+
+\includegraphics[width=0.6\textwidth]{images/8Bit_Adder.png} \\
+
+\noindent 8 Full Adders combine to make system available for 8 bits
+binary addition.
+
+\newpage
+
+\textbf{8Bit Multiplier}
+
+\includegraphics[width=0.6\textwidth]{images/8Bit_Multiplier.png} \\
+
+\noindent Bit-shifting each line and add up together. If the value
+exceed 8 bits, it toggles Overflow Flag in the ALU.
+
+\textbf{Multiplier Helper}
+
+\includegraphics[width=0.6\textwidth]{images/Multiplier_Helper.png} \\
+
+\noindent Help to set the binary ready before bit-shifting
+
+\newpage
+
+\textbf{Data Forwarding Register}
+
+\includegraphics[width=0.6\textwidth]{images/Data_Forwarding_Register.png} \\
+
+\noindent Help to prevent Data Hazard if the earlier instructions have
+the same register used in the later instructions. It can be called from
+here. Every instruction result executed in EX and its destination register
+are stored here for a while then if in no used it drops.
+
+\subsection*{Pipeline States}
+
+\begin{enumerate}
+    \item \textbf{Instruction Fetch} (\texttt{IF}): The \textt{CPU}
+        fetch the instruction line by line from the ROM.
+    \item \textbf{Instruction Decode} (\texttt{ID}): The \texttt{CPU}
+        decode the instruction line we fetch from \texttt{IF} and
+        decode to extract each part of the instruction (e.g. $R_{Dest}$,
+        $R_{Src1}$, $R_{Src2}$, $\#IMM$) to be used in the later stages
+        of pipeline.
+    \item \textbf{Execute} (\texttt{EX}): Every instruction which does
+        not use the \texttt{RAM} are done here. The data can be forward
+        for the later instructions and can transfer to the later pipeline
+        stages too.
+    \item \textbf{Memory} (\texttt{ME}): The data that use \texttt{RAM}
+        are done here (e.g. \texttt{PSH}, \texttt{POP}, \texttt{LD},
+        \texttt{ST}). For the instructions with data as output, the
+        output will combine with the $R_{Dest}$ transferred from earlier
+        pipeline stages and transfer to \texttt{WB} stage.
+    \item \textbf{Write Back} (\texttt{WB}): The data transferred from
+        earlier stages are now ready to be written back to
+        \texttt{Register File}.
+\end{enumerate}
+
+\subsection*{Pipeline Hazards Management}
+
+\begin{enumerate}
+    \item \textbf{Structural Hazards}: Fixed my 2 concepts
+        \begin{enumerate}
+            \item Calculation must be done before accessing RAM or WB stage
+            \item Accessing RAM with LD instruction will return value
+                therefore it must be done before WB stage.
+        \end{enumerate}
+    \item \textbf{Data Hazards}: Fixed by creating
+        \texttt{Data Forwarding Register}.
+    \item \textbf{Control Hazards}: If prediction is wrong the system
+        will the flush pipeline with \texttt{NOP}
+\end{enumerate}
+
+\newpage
+
+\section*{Software Design}
+
+\subsection*{Instructions}
+
+\noindent Instruction Format (Length: 20 bits): \\
+$$Opcode [19:15]\ |\ IMM_{Flag} [14]\ |\ R_{Dest}\ [13:11]\ |\ R_{Src1}\ |\ R_{Src2} [2:0]\ or\ IMM [7:0]$$
+
+\begin{center}
+\scalebox{0.6}{
+\[
+\setlength{\extrarowheight}{5pt} % Adds 5pt to each row's height
+\begin{array}{|l|l|l|}
+\hline
+\textbf{Instruction} & \textbf{Opcode + Fields} & \textbf{Description} \\[4pt]
+\hline
+\text{Do in } IF & & \\
+NOP & 00000\ |\ IMM_{Flag} [14]\ |\ DC[13:0] & \text{No Operation} \\[4pt]
+\hline
+\text{Do in } EX_{ALU} & & \\
+ADD & 00100\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Addition} \\[4pt]
+SUB & 00101\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Subtraction} \\[4pt]
+MUL & 00110\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Multiplication} \\[4pt]
+AND & 01000\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise AND} \\[4pt]
+OR  & 01001\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise OR} \\[4pt]
+XOR & 01010\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_{Src1} [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise XOR} \\[4pt]
+NOT & 01011\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Bitwise NOT} \\[4pt]
+\hline
+\text{Do in } EX_{JUMP} & & \\
+BC & 10000\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Carry} \\[4pt]
+BZ  & 10001\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Zero} \\[4pt]
+BNZ & 10010\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Not Zero} \\[4pt]
+BNG & 10011\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Branch if Negative} \\[4pt]
+B & 10100\ |\ IMM_{Flag} [14]\ |\ DC [13:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Unconditional Branch} \\[4pt]
+\hline
+\text{Do in } ME_{Stack} & & \\
+PSH & 10110\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Push } R_{Src2} \text{ value into Stack} \\[4pt]
+POP & 10111\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Pop the top register value from the Stack} \\[4pt]
+\hline
+\text{Do in } ME_{I/O} & & \\
+RD  & 11000\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Read input value to register} \\[4pt]
+WR  & 11001\ |\ DC [14:3]\ |\ R_{Src2} [2:0] & \text{Write value from register to output} \\[4pt]
+\hline
+\text{Do in } ME_{RAM} & & \\
+LD & 11100\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Load value from memory to register} \\[4pt]
+ST & 11101\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ DC [10:8]\ |\ R_{Src2} [2:0]\ or\ \#IMM [7:0] & \text{Store register to memory} \\[4pt]
+\hline
+\text{Do in } WB & & \\
+MOV & 11110\ |\ IMM_{Flag} [14]\ |\ R_{Dest} [13:11]\ |\ R_src1 [2:0]\ or\ #IMM [7:0] & \text{Move value from} R_{Src1} \text{ or } \#IMM \text{ into } R_{Src1} \\[4pt]
+\hline
+\end{array}
+\]
+}
+\end{center}
+
+\newpage
+
+\subsection*{Assembler}
+
+We had written an assembler in Python. \\
+
+\section*{Test Assembly Code}
+
+\subsection*{Test 1: Overall Instructions}
+\noindent \texttt{test1.ass}
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{}{../test/test1.ass}
+
+\subsection*{Test 2: Data Hazard Check}
+\noindent \texttt{test2.ass}
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{}{../test/test2.ass}
+
+\subsection*{Test 3: Structural Hazard and Control Hazard Check}
+\noindent \texttt{test3.ass}
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{}{../test/test3.ass}
+
+\subsection*{Test 4: Stack Warning Check}
+\noindent \texttt{test4.ass}
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{}{../test/test4.ass}
+
+\subsection*{Test 5: I/O Test}
+\noindent \texttt{test5.ass}
+\inputminted[fontsize=\scriptsize, breaklines, breakanywhere, breakindent=1em]{}{../test/test5.ass}
+
+\newpage
+
+\chapter*{Summary}
+
+\section*{Project Summary}
+
+The \textit{Design and Implementation of a Minimal 8-Bit CPU} project focuses on creating a functional pipelined processor using the \textit{Digital} simulation software. 
+This project integrates theoretical and practical knowledge of computer architecture by designing a five-stage pipelined CPU that executes a custom instruction set architecture (ISA). 
+It emphasizes modular design, digital logic integration, and simulation-based verification of CPU functionalities such as arithmetic operations, branching, and interrupt handling.
+
+\section*{Challenges faced with Solutions}
+\begin{center}
+    \setlength{\extrarowheight}{5pt} % Adds 5pt to each row's height
+    \begin{tabular}{| m{7.75cm} | m{7.75cm} |}
+        \hline
+        \textbf{Challenge} & \textbf{Solution} \\[4pt]
+        \hline
+        CU was too complex using MUX. & Use ROM in CU as signal provider instead. \\
+        \hline
+        Manually converting Assembly code into Binary code and insert line by line into IR was difficult. & Create a compiler to compile Assembly code to Hex code and load into the IR. \\
+        \hline
+        There were too many tangled cables in the circuit. & Use tunnel component to make the circuit more organize. \\
+        \hline
+        RD instruction needed very precise timing set input a value. & Make the input receive the input value available in the input port in that moment of execution. (Therefore, users can pre-input the value and wait for the instruction to execute.) \\
+        \hline
+        We fetch wrong data when we want to fetch data before editing. & Try falling edge signal. \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\end{document}

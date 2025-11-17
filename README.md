@@ -50,7 +50,7 @@ finished.
 - Implement Software Interrupt
 - Expand to 32 bits
 
-### [Successor repository](https://github.com/Pottarr/32Bit-CPU)
+### [Successor repository](https://github.com/Pottarr/I-ASSUME-CPU)
 
 ### Contributers
 
